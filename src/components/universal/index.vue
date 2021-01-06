@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import ConfigPropsList from "./config";
+import { ConfigPropsMap } from "./config";
 export default {
   name: "UniversalComponent",
   props: {
@@ -50,7 +50,7 @@ export default {
   },
   methods: {
     getConfigProps() {
-      console.log(ConfigPropsList);
+      console.log(ConfigPropsMap);
     },
   },
 };

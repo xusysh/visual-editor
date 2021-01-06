@@ -10,7 +10,9 @@
   "dependencies": {
     "@vue/cli-plugin-babel": "4.1.1",
     "browserify": "17.0.0",
-    "vue": "^2.6.11"
+    "element-ui": "2.13.0",
+    "vue": "2.6.12",
+    "vuedraggable": "2.24.3"
   },
   "devDependencies": {
     "@vue/cli-plugin-eslint": "4.1.1",
