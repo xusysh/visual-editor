@@ -18,7 +18,7 @@
               <span>属性编辑（组件名）</span>
             </div>
             <div style="text-align: left">
-              <editor-component-prop style="fixed" />
+              <editor-component-prop />
               <editor-component-list />
             </div>
           </el-card>

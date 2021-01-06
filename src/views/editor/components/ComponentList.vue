@@ -6,12 +6,41 @@
         :key="index"
         :title="componentCatagory.title"
       >
-        <div>
-          与现实生活一致：与现实生活的流程、逻辑保持一致，遵循用户习惯的语言和概念；
-        </div>
-        <div>
-          在界面中一致：所有的元素和结构需保持一致，比如：设计样式、图标和文本、元素的位置等。
-        </div>
+        <el-row :gutter="20">
+          <el-col :span="8">
+            <el-card :body-style="{ padding: '0px' }">
+              <img
+                src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
+                class="image"
+              />
+              <div class="catagory-title">
+                <span>好吃的汉堡</span>
+              </div>
+            </el-card>
+          </el-col>
+          <el-col :span="8">
+            <el-card :body-style="{ padding: '0px' }">
+              <img
+                src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
+                class="image"
+              />
+              <div class="catagory-title">
+                <span>好吃的汉堡</span>
+              </div>
+            </el-card>
+          </el-col>
+          <el-col :span="8">
+            <el-card :body-style="{ padding: '0px' }">
+              <img
+                src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
+                class="image"
+              />
+              <div class="catagory-title">
+                <span>好吃的汉堡</span>
+              </div>
+            </el-card>
+          </el-col>
+        </el-row>
       </el-collapse-item>
     </el-collapse>
   </div>
@@ -35,4 +64,16 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped></style>
+<style scoped>
+.image {
+  width: 100%;
+  display: block;
+}
+.catagory-title {
+  padding: 6px;
+  text-align: center;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+</style>
