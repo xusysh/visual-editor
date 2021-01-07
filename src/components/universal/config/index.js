@@ -1,7 +1,63 @@
 export const configPropsMap = {
   common: {
-    margin: {},
-    padding: {}
+    margin: {
+      name: "外边距",
+      top: {
+        name: "上",
+        value: "0px"
+      },
+      bottom: {
+        name: "下",
+        value: "0px"
+      },
+      left: {
+        name: "左",
+        value: "0px"
+      },
+      right: {
+        name: "右",
+        value: "0px"
+      }
+    },
+    padding: {
+      name: "内边距",
+      top: {
+        name: "上",
+        value: "0px"
+      },
+      bottom: {
+        name: "下",
+        value: "0px"
+      },
+      left: {
+        name: "左",
+        value: "0px"
+      },
+      right: {
+        name: "右",
+        value: "0px"
+      }
+    },
+    border: {
+      name: "边框",
+      width: {
+        name: "宽度",
+        value: "0px"
+      },
+      color: {
+        name: "颜色",
+        value: "#000",
+        options: []
+      },
+      type: {
+        name: "类型",
+        value: "solid",
+        options: []
+      }
+    }
+  },
+  div: {
+    name: "通用布局块"
   },
   responsiveRow: {
     name: "自适应行布局容器",
@@ -32,7 +88,7 @@ export const configPropsMap = {
 export const componentCatagoryList = [
   {
     title: "布局容器",
-    components: ["responsiveRow", "responsiveCol"]
+    components: ["div", "responsiveRow", "responsiveCol"]
   },
   {
     title: "表单组件",

@@ -21,6 +21,13 @@
               <editor-component-prop />
               <editor-component-list />
             </div>
+            <!-- <XPEHandler
+              class="handler"
+              mode="vertical"
+              position="left"
+              :expand="true"
+              :callback="toggleHandler"
+            ></XPEHandler> -->
           </el-card>
         </el-aside>
       </el-container>
@@ -32,6 +39,7 @@
 </template>
 
 <script>
+// import XPEHandler from "@/components/handler";
 import EditorHeader from "./components/Header";
 import EditorComponentList from "./components/ComponentList";
 import EditorCanvas from "./components/Canvas";
@@ -42,12 +50,15 @@ export default {
   data() {
     return {};
   },
-  methods: {},
+  methods: {
+    toggleHandler() {},
+  },
   components: {
     EditorHeader,
     EditorComponentList,
     EditorCanvas,
     EditorComponentProp,
+    // XPEHandler,
   },
 };
 </script>
@@ -64,5 +75,10 @@ body,
   margin: 0px;
   /*统一设置高度为100%*/
   height: 100%;
+}
+.handler {
+}
+.handler:hover {
+  margin-left: -10px;
 }
 </style>
