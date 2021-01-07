@@ -1,12 +1,11 @@
 <template>
   <div>
-    <component :is="targetType">
+    <component :is="targetType" v-bind="props" :style="config.style">
       <div v-if="children && children.length > 0">
         <universal-component
           v-for="(child, index) in children"
           :key="index"
-          :target-type="child.targetType"
-          :children="child.children"
+          v-bind="child"
         >
         </universal-component>
       </div>
@@ -15,7 +14,7 @@
 </template>
 
 <script>
-// import { ConfigPropsMap } from "./config";
+import { ConfigPropsMap } from "./config";
 export default {
   name: "UniversalComponent",
   props: {
@@ -39,11 +38,20 @@ export default {
       type: Array,
       default: () => [],
     },
-    // 组件配置项
-    config: {
+    // 组件属性
+    props: {
       type: Object,
       default: () => {
         return {};
+      },
+    },
+    // 组件样式及其他配置
+    config: {
+      type: Object,
+      default: () => {
+        return {
+          style: {},
+        };
       },
     },
   },
@@ -51,16 +59,15 @@ export default {
     return {
       // 组件的可选配置项定义
       configProps: {},
+      // style：根据config生成
     };
   },
   created() {
-    console.log("hhh");
-    console.log(this.children);
-    this.getConfigProps();
+    this.parseConfig();
   },
   methods: {
-    getConfigProps() {
-      // console.log(ConfigPropsMap);
+    parseConfig() {
+      console.log(ConfigPropsMap);
     },
   },
 };
