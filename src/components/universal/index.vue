@@ -1,6 +1,11 @@
 <template>
   <div>
-    <component :is="targetType" v-bind="props" :style="config.style">
+    <component
+      :is="targetType"
+      v-bind="props"
+      :style="config.style"
+      :class="config.class"
+    >
       <div v-if="children && children.length > 0">
         <universal-component
           v-for="(child, index) in children"
@@ -14,7 +19,7 @@
 </template>
 
 <script>
-import { ConfigPropsMap } from "./config";
+import { compDefMap } from "./config";
 export default {
   name: "UniversalComponent",
   props: {
@@ -51,15 +56,17 @@ export default {
       default: () => {
         return {
           style: {},
+          class: {},
         };
       },
     },
   },
   data() {
     return {
-      // 组件的可选配置项定义
-      configProps: {},
-      // style：根据config生成
+      // 组件的props定义
+      PropsDef: {},
+      // 组件的配置定义
+      configDef: {},
     };
   },
   created() {
@@ -67,7 +74,7 @@ export default {
   },
   methods: {
     parseConfig() {
-      console.log(ConfigPropsMap);
+      console.log(compDefMap);
     },
   },
 };

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <universal-component target-type="el-row" v-bind="component">
+    <universal-component target-type="div" v-bind="component">
     </universal-component>
   </div>
 </template>
@@ -16,6 +16,7 @@ export default {
             targetType: "el-input",
             config: {
               style: { border: "1px solid red" },
+              class: "randomClass",
             },
           },
           {
@@ -24,16 +25,19 @@ export default {
               {
                 targetType: "el-col",
                 props: {
-                  span: 4,
+                  span: 6,
                 },
-                config: {
-                  style: { border: "1px solid red" },
-                },
+                children: [
+                  {
+                    targetType: "el-input",
+                  },
+                ],
               },
             ],
           },
         ],
         props: {},
+        config: {},
       },
     };
   },
@@ -43,4 +47,5 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped></style>
+<style>
+</style>

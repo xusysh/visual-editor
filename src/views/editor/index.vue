@@ -76,9 +76,4 @@ body,
   /*统一设置高度为100%*/
   height: 100%;
 }
-.handler {
-}
-.handler:hover {
-  margin-left: -10px;
-}
 </style>

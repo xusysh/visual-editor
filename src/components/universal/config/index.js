@@ -1,63 +1,67 @@
-export const configPropsMap = {
+export const compDefMap = {
   common: {
-    margin: {
-      name: "外边距",
-      top: {
-        name: "上",
-        value: "0px"
-      },
-      bottom: {
-        name: "下",
-        value: "0px"
-      },
-      left: {
-        name: "左",
-        value: "0px"
-      },
-      right: {
-        name: "右",
-        value: "0px"
+    config: {
+      style: {
+        margin: {
+          name: "外边距",
+          top: {
+            name: "上",
+            value: "0px"
+          },
+          bottom: {
+            name: "下",
+            value: "0px"
+          },
+          left: {
+            name: "左",
+            value: "0px"
+          },
+          right: {
+            name: "右",
+            value: "0px"
+          }
+        },
+        padding: {
+          name: "内边距",
+          top: {
+            name: "上",
+            value: "0px"
+          },
+          bottom: {
+            name: "下",
+            value: "0px"
+          },
+          left: {
+            name: "左",
+            value: "0px"
+          },
+          right: {
+            name: "右",
+            value: "0px"
+          }
+        },
+        border: {
+          name: "边框",
+          width: {
+            name: "宽度",
+            value: "0px"
+          },
+          color: {
+            name: "颜色",
+            value: "#000",
+            options: []
+          },
+          type: {
+            name: "类型",
+            value: "solid",
+            options: []
+          }
+        },
+        color: {
+          name: "颜色",
+          value: ""
+        }
       }
-    },
-    padding: {
-      name: "内边距",
-      top: {
-        name: "上",
-        value: "0px"
-      },
-      bottom: {
-        name: "下",
-        value: "0px"
-      },
-      left: {
-        name: "左",
-        value: "0px"
-      },
-      right: {
-        name: "右",
-        value: "0px"
-      }
-    },
-    border: {
-      name: "边框",
-      width: {
-        name: "宽度",
-        value: "0px"
-      },
-      color: {
-        name: "颜色",
-        value: "#000",
-        options: []
-      },
-      type: {
-        name: "类型",
-        value: "solid",
-        options: []
-      }
-    },
-    color: {
-      name: "颜色",
-      value: ""
     }
   },
   div: {
@@ -70,9 +74,11 @@ export const configPropsMap = {
       value: "el-col",
       options: ["el-col"]
     },
-    gutter: {
-      name: "列间隔（栅格数）",
-      value: 0
+    props: {
+      gutter: {
+        name: "列间隔（栅格数）",
+        value: 0
+      }
     }
   },
   responsiveCol: {
@@ -82,9 +88,11 @@ export const configPropsMap = {
       value: "el-col",
       options: ["el-col"]
     },
-    span: {
-      name: "占用栅格数",
-      value: 4
+    props: {
+      span: {
+        name: "占用栅格数",
+        value: 4
+      }
     }
   }
 };
