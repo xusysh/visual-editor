@@ -7,7 +7,7 @@
       <el-container style="height: 98%; overflow: auto">
         <el-main>
           <el-card style="height: 98%" class="box-card">
-            <div>
+            <div style="text-align: left">
               <editor-canvas />
             </div>
           </el-card>

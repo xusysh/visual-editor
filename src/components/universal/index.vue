@@ -1,8 +1,9 @@
 <template>
   <div>
-    <!-- <component v-if="canPlaceChild" /> -->
+    <component :is="targetType">
+      <slot name="children"></slot>
+    </component>
   </div>
-  <!-- <component /> -->
 </template>
 
 <script>
@@ -11,7 +12,7 @@ export default {
   name: "UniversalComponent",
   props: {
     // 组件类型
-    type: {
+    targetType: {
       type: String,
       required: true,
     },

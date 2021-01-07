@@ -1,2 +1,2 @@
-# visua
+# visual-editor
 Created with CodeSandbox

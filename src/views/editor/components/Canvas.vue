@@ -1,8 +1,15 @@
 <template>
-  <div></div>
+  <div>
+    <universal-component target-type="el-row">
+      <template v-slot:children>
+        <h1>children</h1>
+      </template>
+    </universal-component>
+  </div>
 </template>
 
 <script>
+import UniversalComponent from "@/components/universal";
 export default {
   data() {
     return {
@@ -10,7 +17,7 @@ export default {
     };
   },
   methods: {},
-  components: {},
+  components: { UniversalComponent },
 };
 </script>
 

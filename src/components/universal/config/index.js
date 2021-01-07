@@ -54,6 +54,10 @@ export const configPropsMap = {
         value: "solid",
         options: []
       }
+    },
+    color: {
+      name: "颜色",
+      value: ""
     }
   },
   div: {
