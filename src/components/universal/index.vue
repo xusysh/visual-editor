@@ -1,13 +1,21 @@
 <template>
   <div>
     <component :is="targetType">
-      <slot name="children"></slot>
+      <div v-if="children && children.length > 0">
+        <universal-component
+          v-for="(child, index) in children"
+          :key="index"
+          :target-type="child.targetType"
+          :children="child.children"
+        >
+        </universal-component>
+      </div>
     </component>
   </div>
 </template>
 
 <script>
-import { ConfigPropsMap } from "./config";
+// import { ConfigPropsMap } from "./config";
 export default {
   name: "UniversalComponent",
   props: {
@@ -26,32 +34,33 @@ export default {
       type: String,
       default: "组件描述",
     },
+    // 嵌套的子组件
+    children: {
+      type: Array,
+      default: () => [],
+    },
     // 组件配置项
     config: {
       type: Object,
       default: () => {
-        return {
-          type: "",
-        };
+        return {};
       },
     },
   },
   data() {
     return {
-      // 是否可以存放子组件
-      canPlaceChild: false,
-      // 嵌套的子组件
-      children: [],
       // 组件的可选配置项定义
       configProps: {},
     };
   },
   created() {
+    console.log("hhh");
+    console.log(this.children);
     this.getConfigProps();
   },
   methods: {
     getConfigProps() {
-      console.log(ConfigPropsMap);
+      // console.log(ConfigPropsMap);
     },
   },
 };

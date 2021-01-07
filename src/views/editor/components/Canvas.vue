@@ -1,9 +1,6 @@
 <template>
   <div>
-    <universal-component target-type="el-row">
-      <template v-slot:children>
-        <h1>children</h1>
-      </template>
+    <universal-component target-type="el-row" :children="children">
     </universal-component>
   </div>
 </template>
@@ -13,7 +10,9 @@ import UniversalComponent from "@/components/universal";
 export default {
   data() {
     return {
-      componentList: [],
+      component: {
+        children: [{ targetType: "input" }],
+      },
     };
   },
   methods: {},

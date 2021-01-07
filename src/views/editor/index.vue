@@ -12,7 +12,7 @@
             </div>
           </el-card>
         </el-main>
-        <el-aside style="padding: 20px" width="400px">
+        <el-aside style="padding: 20px" width="360px">
           <el-card style="height: 98%; overflow: auto" class="box-card">
             <div slot="header" class="clearfix" style="text-align: left">
               <span>属性编辑（组件名）</span>
