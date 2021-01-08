@@ -10,7 +10,7 @@
     </el-radio-group>
     <el-menu
       class="el-menu-vertical-demo"
-      :default-active="'0'"
+      :default-openeds="['0']"
       @select="handleSelect"
       :collapse="compMenuCollapse"
     >
