@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import compDefenitionMap from "./config/compDefenitionMap";
+import componentDefinition from "./config/componentDefinition";
 export default {
   name: "UniversalComponent",
   props: {
@@ -75,7 +75,7 @@ export default {
   },
   methods: {
     parseConfig() {
-      console.log(compDefenitionMap);
+      console.log(componentDefinition);
     },
   },
 };
