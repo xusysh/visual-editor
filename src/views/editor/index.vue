@@ -5,14 +5,22 @@
         <editor-header />
       </el-header>
       <el-container style="height: 98%; overflow: hidden">
+        <!-- <el-aside style="padding: 20px"> </el-aside> -->
         <el-main>
           <el-card style="height: 98%" class="box-card">
-            <div style="text-align: left">
-              <editor-canvas />
+            <div style="text-align: left; height: 100%">
+              <editor-component-list
+                style="
+                  position: fixed;
+                  height: calc(100% - 160px);
+                  overflow: auto;
+                "
+              />
             </div>
+            <editor-canvas />
           </el-card>
         </el-main>
-        <el-aside style="padding: 20px" width="360px">
+        <el-aside style="padding: 20px" width="380px">
           <el-card
             style="height: 98%; overflow: hidden"
             class="box-card"
@@ -23,7 +31,6 @@
             </div>
             <div style="text-align: left; height: 100%">
               <editor-component-prop />
-              <!-- <editor-component-list /> -->
             </div>
             <!-- <XPEHandler
               class="handler"
@@ -45,21 +52,23 @@
 <script>
 // import XPEHandler from "@/components/handler";
 import EditorHeader from "./components/Header";
-// import EditorComponentList from "./components/ComponentList";
+import EditorComponentList from "./components/ComponentList";
 import EditorCanvas from "./components/Canvas";
 import EditorComponentProp from "./components/ComponentProp";
 // import UniversalComponent from "@/components/universal";
 export default {
   name: "Editor",
   data() {
-    return {};
+    return {
+      compMenuCollapse: true,
+    };
   },
   methods: {
     toggleHandler() {},
   },
   components: {
     EditorHeader,
-    // EditorComponentList,
+    EditorComponentList,
     EditorCanvas,
     EditorComponentProp,
     // XPEHandler,
@@ -79,5 +88,8 @@ body,
   margin: 0px;
   /*统一设置高度为100%*/
   height: 100%;
+}
+.el-menu-vertical-demo:not(.el-menu--collapse) {
+  width: 200px;
 }
 </style>

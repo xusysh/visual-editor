@@ -1,57 +1,67 @@
 <template>
   <div>
-    <el-collapse style="margin-top: 0px">
-      <el-collapse-item
+    <el-radio-group
+      v-model="compMenuCollapse"
+      style="margin-bottom: 20px"
+      size="small"
+    >
+      <el-radio-button :label="false">展开组件</el-radio-button>
+      <el-radio-button :label="true">收起组件</el-radio-button>
+    </el-radio-group>
+    <el-menu
+      class="el-menu-vertical-demo"
+      :default-active="'0'"
+      @select="handleSelect"
+      :collapse="compMenuCollapse"
+    >
+      <el-submenu
         v-for="(componentCatagory, index) in componentCatagoryList"
         :key="index"
-        :title="componentCatagory.title"
+        :index="index.toString()"
       >
-        <el-row :gutter="20">
-          <el-col :span="8" v-for="o in 3" :key="o">
-            <el-card :body-style="{ padding: '0px' }">
-              <img
-                src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
-                class="image"
-              />
-              <div class="catagory-title">
-                <span>好吃的汉堡</span>
-              </div>
-            </el-card>
-          </el-col>
-        </el-row>
-      </el-collapse-item>
-    </el-collapse>
+        <template slot="title">
+          <i :class="componentCatagory.icon"></i>
+          <span slot="title">{{ componentCatagory.title }}</span>
+        </template>
+        <el-menu-item
+          v-for="(component, subIndex) in componentCatagory.components"
+          :key="subIndex"
+          :index="`${index}-${subIndex}`"
+        >
+          {{ component.name }}
+        </el-menu-item>
+      </el-submenu>
+    </el-menu>
   </div>
 </template>
 
 <script>
 import componentCatagoryList from "@/components/universal/config/componentCatagoryList";
+import componentDefinition from "@/components/universal/config/componentDefinition";
 export default {
   data() {
     return {
-      componentCatagoryList: [],
+      compMenuCollapse: false,
+      componentCatagoryList: componentCatagoryList,
     };
   },
   created() {
-    console.log(componentCatagoryList);
-    this.componentCatagoryList = componentCatagoryList;
+    this.getCompDef();
   },
-  methods: {},
-  components: {},
+  methods: {
+    getCompDef() {
+      for (const componentCatagory of componentCatagoryList) {
+        componentCatagory.components = componentCatagory.components.map(
+          (item) => componentDefinition[item]
+        );
+      }
+      console.log(componentCatagoryList);
+    },
+    handleSelect() {},
+  },
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-.image {
-  width: 100%;
-  display: block;
-}
-.catagory-title {
-  padding: 6px;
-  text-align: center;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
+<style>
 </style>

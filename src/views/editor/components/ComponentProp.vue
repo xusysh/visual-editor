@@ -5,18 +5,15 @@
       type="border-card"
       style="box-shadow: none; border-width: 1px 0 0 0; height: 100%"
     >
-      <el-tab-pane label="元素样式">
+      <el-tab-pane label="常用样式">
         <el-collapse v-model="activeCollapse">
           <el-collapse-item
-            v-for="(styleElement, index) in this.commonConfig.style"
+            v-for="(styleElement, index) in componentStyleDefinition.style"
             :key="index"
             :name="styleElement.name"
             :title="styleElement.name"
           >
-            <el-form
-              label-width="40px"
-              style="padding: 0 20px 0 0; height: 100%"
-            >
+            <el-form style="padding: 0 20px 0 0; height: 100%">
               <el-col
                 v-for="(styleElementOption, index) in styleElement"
                 :key="index"
@@ -24,24 +21,41 @@
                 :offset="1"
               >
                 <el-form-item
+                  :label-width="
+                    styleElementOption.labelWidth
+                      ? styleElementOption.labelWidth
+                      : '40px'
+                  "
                   v-show="styleElementOption.name"
                   :label="styleElementOption.name"
-                  v-model="styleElementOption.value"
                 >
-                  <el-input></el-input>
+                  <component
+                    :is="styleElementOption.optionType"
+                    style="width: 100%"
+                    v-model="styleElementOption.value"
+                  >
+                    <div v-if="styleElementOption.optionType === 'el-select'">
+                      <el-option
+                        v-for="item in styleElementOption.options"
+                        :key="item.value"
+                        :value="item.value"
+                        :label="item.label"
+                      ></el-option>
+                    </div>
+                  </component>
                 </el-form-item>
               </el-col>
             </el-form>
           </el-collapse-item>
         </el-collapse>
       </el-tab-pane>
-      <el-tab-pane label="控件属性"></el-tab-pane>
+      <el-tab-pane label="控件属性"> </el-tab-pane>
       <el-tab-pane label="内嵌HTML" style="padding: 6px 20px">
         <el-input
           style="margin-top: 16px"
           type="textarea"
           :autosize="{ minRows: 16, maxRows: 200 }"
-          v-model="commonConfig.innerHtml.value"
+          v-model="componentStyleDefinition.innerHtml.value"
         ></el-input>
       </el-tab-pane>
     </el-tabs>
@@ -49,28 +63,29 @@
 </template>
 
 <script>
-import compDefenitionMap from "@/components/universal/config/compDefenitionMap";
+import componentStyleDefinition from "@/components/universal/config/componentStyleDefinition.js";
 export default {
   data() {
     return {
       activeCollapse: [],
-      commonConfig: compDefenitionMap.common.config,
-      current: {},
+      componentStyleDefinition: componentStyleDefinition,
     };
-  },
-  watch: {
-    current(cur) {
-      console.log(cur);
-    },
   },
   created() {
     this.parseComponentDef();
   },
+  computed: {
+    currentComp() {
+      const curComp = this.$store.state.visualEditor;
+      console.log(curComp);
+      return curComp;
+    },
+  },
   methods: {
     parseComponentDef() {
-      this.activeCollapse = Object.values(this.commonConfig.style).map(
-        (item) => item.name
-      );
+      this.activeCollapse = Object.values(
+        this.componentStyleDefinition.style
+      ).map((item) => item.name);
     },
   },
   components: {},
