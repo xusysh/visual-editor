@@ -4,7 +4,7 @@
       <el-header>
         <editor-header />
       </el-header>
-      <el-container style="height: 98%; overflow: auto">
+      <el-container style="height: 98%; overflow: hidden">
         <el-main>
           <el-card style="height: 98%" class="box-card">
             <div style="text-align: left">
@@ -13,13 +13,17 @@
           </el-card>
         </el-main>
         <el-aside style="padding: 20px" width="360px">
-          <el-card style="height: 98%; overflow: auto" class="box-card">
+          <el-card
+            style="height: 98%; overflow: hidden"
+            class="box-card"
+            :body-style="{ padding: '0px', height: '90%' }"
+          >
             <div slot="header" class="clearfix" style="text-align: left">
-              <span>属性编辑（组件名）</span>
+              <span>组件编辑</span>
             </div>
-            <div style="text-align: left">
+            <div style="text-align: left; height: 100%">
               <editor-component-prop />
-              <editor-component-list />
+              <!-- <editor-component-list /> -->
             </div>
             <!-- <XPEHandler
               class="handler"
@@ -41,7 +45,7 @@
 <script>
 // import XPEHandler from "@/components/handler";
 import EditorHeader from "./components/Header";
-import EditorComponentList from "./components/ComponentList";
+// import EditorComponentList from "./components/ComponentList";
 import EditorCanvas from "./components/Canvas";
 import EditorComponentProp from "./components/ComponentProp";
 // import UniversalComponent from "@/components/universal";
@@ -55,7 +59,7 @@ export default {
   },
   components: {
     EditorHeader,
-    EditorComponentList,
+    // EditorComponentList,
     EditorCanvas,
     EditorComponentProp,
     // XPEHandler,

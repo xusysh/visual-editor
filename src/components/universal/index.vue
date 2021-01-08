@@ -5,6 +5,7 @@
       v-bind="props"
       :style="config.style"
       :class="config.class"
+      v-html="config.innerHtml"
     >
       <div v-if="children && children.length > 0">
         <universal-component
@@ -19,7 +20,7 @@
 </template>
 
 <script>
-import  compDefenitionMap  from "./config/compDefenitionMap";
+import compDefenitionMap from "./config/compDefenitionMap";
 export default {
   name: "UniversalComponent",
   props: {

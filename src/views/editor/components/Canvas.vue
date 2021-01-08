@@ -11,33 +11,33 @@ export default {
   data() {
     return {
       component: {
-        children: [
-          {
-            targetType: "el-input",
-            config: {
-              style: { border: "1px solid red" },
-              class: "randomClass",
-            },
-          },
-          {
-            targetType: "el-row",
-            children: [
-              {
-                targetType: "el-col",
-                props: {
-                  span: 6,
-                },
-                children: [
-                  {
-                    targetType: "el-input",
-                  },
-                ],
-              },
-            ],
-          },
-        ],
-        props: {},
-        config: {},
+        // children: [
+        //   {
+        //     targetType: "el-input",
+        //     config: {
+        //       style: { border: "1px solid red" },
+        //       class: "randomClass",
+        //     },
+        //   },
+        //   {
+        //     targetType: "el-row",
+        //     children: [
+        //       {
+        //         targetType: "el-col",
+        //         props: {
+        //           span: 6,
+        //         },
+        //         children: [
+        //           {
+        //             targetType: "el-input",
+        //           },
+        //         ],
+        //       },
+        //     ],
+        //   },
+        // ],
+        // props: {},
+        // config: {},
       },
     };
   },
