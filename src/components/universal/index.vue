@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import { compDefMap } from "./config";
+import  compDefenitionMap  from "./config/compDefenitionMap";
 export default {
   name: "UniversalComponent",
   props: {
@@ -74,7 +74,7 @@ export default {
   },
   methods: {
     parseConfig() {
-      console.log(compDefMap);
+      console.log(compDefenitionMap);
     },
   },
 };
