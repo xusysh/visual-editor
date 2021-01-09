@@ -5,8 +5,9 @@
       v-bind="props"
       :style="config.style"
       :class="config.class"
-      v-html="config.innerHtml"
     >
+      <div v-text="config.innerText"></div>
+      <div v-html="config.innerHtml"></div>
       <div v-if="children && children.length > 0">
         <universal-component
           v-for="(child, index) in children"
@@ -75,6 +76,8 @@ export default {
   },
   methods: {
     parseConfig() {
+      console.log(this.targetType);
+      console.log(this.children);
       console.log(componentDefinition);
     },
   },
