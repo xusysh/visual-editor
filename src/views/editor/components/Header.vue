@@ -1,5 +1,14 @@
 <template>
   <div class="editor-header">
+    <el-radio-group
+      style="position: fixed; top: 15px; left: 40px"
+      v-model="compMenuCollapse"
+      size="small"
+      @change="compNavCollapseChange"
+    >
+      <el-radio-button :label="true">收起组件</el-radio-button>
+      <el-radio-button :label="false">展开组件</el-radio-button>
+    </el-radio-group>
     <el-button icon="el-icon-refresh-left">撤销</el-button>
     <el-button icon="el-icon-refresh-right">重做</el-button>
     <el-button icon="el-icon-view">预览</el-button>
@@ -11,9 +20,15 @@
 <script>
 export default {
   data() {
-    return {};
+    return {
+      compMenuCollapse: false,
+    };
   },
-  methods: {},
+  methods: {
+    compNavCollapseChange(val) {
+      this.$bus.emit("compNavCollapseChange", val);
+    },
+  },
   components: {},
 };
 </script>

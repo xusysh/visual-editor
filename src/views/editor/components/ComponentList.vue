@@ -1,13 +1,5 @@
 <template>
   <div>
-    <el-radio-group
-      v-model="compMenuCollapse"
-      style="margin-bottom: 20px"
-      size="small"
-    >
-      <el-radio-button :label="false">展开组件</el-radio-button>
-      <el-radio-button :label="true">收起组件</el-radio-button>
-    </el-radio-group>
     <el-menu
       class="el-menu-vertical-demo"
       :default-openeds="['0']"
@@ -39,6 +31,7 @@
 import componentCatagoryList from "@/components/universal/config/componentCatagoryList";
 import componentDefinition from "@/components/universal/config/componentDefinition";
 export default {
+  props: {},
   data() {
     return {
       compMenuCollapse: false,
@@ -47,6 +40,9 @@ export default {
   },
   created() {
     this.getCompDef();
+    this.$bus.on("compNavCollapseChange", (val) => {
+      this.compMenuCollapse = val;
+    });
   },
   methods: {
     getCompDef() {
