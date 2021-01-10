@@ -123,6 +123,13 @@ export default {
     },
     other: {
       name: "其他",
+      class: {
+        name: "元素类型",
+        value: "",
+        optionType: "el-input",
+        optionSpan: 23,
+        labelWidth: "80px"
+      },
       innerText: {
         name: "内嵌文字",
         value: "",
@@ -139,7 +146,7 @@ export default {
       },
       backgroundColor: {
         name: "背景色",
-        value: "#000",
+        value: "",
         optionType: "el-color-picker",
         optionSpan: 11,
         labelWidth: "80px"

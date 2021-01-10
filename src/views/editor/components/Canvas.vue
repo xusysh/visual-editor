@@ -1,6 +1,6 @@
 <template>
   <div style="text-align: left">
-    <universal-component target-type="div" v-bind="component">
+    <universal-component target-type="div" v-bind.sync="component">
     </universal-component>
   </div>
 </template>
@@ -16,11 +16,9 @@ export default {
             targetType: "el-input",
             config: {
               style: {
-                border: "1px solid red",
                 width: "30%",
                 "margin-left": "50%",
               },
-              class: "randomClass",
             },
           },
           {

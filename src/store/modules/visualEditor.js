@@ -2,9 +2,17 @@ const state = {
   curComp: {}
 };
 
-const mutations = {};
+const mutations = {
+  SET_CUR_COMP(state, payload) {
+    state.curComp = payload;
+  }
+};
 
-const actions = {};
+const actions = {
+  async SET_CUR_COMP({ commit, state }, payload) {
+    commit("SET_CUR_COMP", payload);
+  }
+};
 
 export default {
   namespaced: true,
