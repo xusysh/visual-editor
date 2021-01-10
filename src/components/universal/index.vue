@@ -1,23 +1,22 @@
 <template>
-  <div style="position: relative">
-    <component
-      :is="targetType"
-      v-bind="props"
-      :style="config.style"
-      @mouseenter.native="onMouseEnter($event)"
-      @mouseleave.native="onMouseLeave"
-      class="uni-comp"
-    >
-      <div
-        style="
-          position: absolute;
-          top: 0;
-          background-color: red;
-          width: 100%;
-          height: 100%;
+  <div
+    style="position: relative"
+    @mouseover="onMouseEnter"
+    @mouseout="onMouseLeave"
+    class="uni-comp"
+    :style="config.style"
+  >
+    <div
+      style="
+        z-index: 100000; display: block; width: 100%;height:100%;opacity: 0.5;
+    background: #eee;
+    border: 1px solid #999;
+    pointer-events: none;
+    position: absolute;
         "
-        v-show="mouseOver"
-      ></div>
+      v-show="mouseOver"
+    ></div>
+    <component :is="targetType" v-bind="props">
       <div v-text="config.innerText"></div>
       <div v-html="config.innerHtml"></div>
       <div v-if="children && children.length > 0">
@@ -67,7 +66,6 @@ export default {
         return {};
       },
     },
-
     // 组件样式及其他配置
     config: {
       type: Object,
@@ -102,10 +100,15 @@ export default {
     onMouseEnter(event) {
       console.log(event);
       event.stopPropagation();
+      event.preventDefault();
+      this.mouseOver = true;
       console.log(this.targetType + " enter");
       // this.mouseOver = true;
     },
-    onMouseLeave() {
+    onMouseLeave(event) {
+      console.log(event);
+      event.stopPropagation();
+      this.mouseOver = false;
       console.log(this.targetType + " leave");
       // this.mouseOver = false;
     },
@@ -116,7 +119,7 @@ export default {
 <style scoped lang="scss">
 .uni-comp {
   &:hover {
-    outline: 1px solid #ddd !important;
+    outline: 1px dashed #ddd !important;
   }
 }
 </style>

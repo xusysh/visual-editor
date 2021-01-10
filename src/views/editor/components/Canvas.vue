@@ -29,9 +29,11 @@ export default {
                 props: {
                   span: 12,
                 },
-                config: {
-                  innerHtml: "&nbsp;",
-                },
+                 children: [
+                  {
+                    targetType: "el-input",
+                  },
+                ],
               },
               {
                 targetType: "el-col",

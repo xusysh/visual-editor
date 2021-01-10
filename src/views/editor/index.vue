@@ -1,6 +1,6 @@
 <template>
   <div style="height: 100%; overflow-y: auto; overflow: hidden">
-    <el-container>
+    <el-container >
       <el-header>
         <editor-header />
       </el-header>

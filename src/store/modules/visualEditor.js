@@ -9,7 +9,7 @@ const mutations = {
 };
 
 const actions = {
-  async SET_CUR_COMP({ commit, state }, payload) {
+  async SET_CUR_COMP({ commit }, payload) {
     commit("SET_CUR_COMP", payload);
   }
 };

@@ -1,7 +1,7 @@
 <template>
   <div class="editor-header">
     <el-radio-group
-      style="position: fixed; top: 15px; left: 40px"
+      style="position: absolute; top: 15px; left: 40px"
       v-model="compMenuCollapse"
       size="small"
       @change="compNavCollapseChange"
@@ -37,6 +37,7 @@ export default {
 <style scoped>
 .editor-header {
   /* text-align: left; */
+  position: relative;
   padding: 10px 10px 10px 10px;
   border-bottom: 0.5px solid #dadada;
 }
