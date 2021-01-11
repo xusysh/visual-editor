@@ -119,8 +119,9 @@ export default {
       // console.log(this.targetType + " leave");
       // this.mouseOver = false;
     },
-    setCurComp() {
-      this.$store.dispatch("visualEditor/SET_CUR_COMP", this.props);
+    setCurComp(event) {
+      event.stopPropagation();
+      this.$store.dispatch("visualEditor/SET_CUR_COMP", this.$props);
     },
   },
 };
@@ -157,6 +158,7 @@ export default {
   background-color: white;
 }
 .el-select /deep/ .el-input.is-disabled /deep/ .el-input__inner {
+  cursor: default;
   background-color: white;
 }
 </style>

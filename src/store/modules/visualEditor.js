@@ -11,7 +11,6 @@ const mutations = {
 
 const actions = {
   async SET_CUR_COMP({ commit }, payload) {
-    alert(1)
     commit("SET_CUR_COMP", payload);
   }
 };

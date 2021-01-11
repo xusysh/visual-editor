@@ -1,5 +1,5 @@
 const getters = {
-  designer: (state) => state.designer,
-  curComp: (state) => state.curComp
+  designer: (state) => state.visualEditor.designer,
+  curComp: (state) => state.visualEditor.curComp
 };
 export default getters;
