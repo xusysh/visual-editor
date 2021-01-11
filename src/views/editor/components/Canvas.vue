@@ -1,7 +1,6 @@
 <template>
   <div style="text-align: left">
-    <universal-component v-bind.sync="component">
-    </universal-component>
+    <universal-component v-bind.sync="component"> </universal-component>
   </div>
 </template>
 
@@ -11,18 +10,12 @@ export default {
   data() {
     return {
       component: {
-        targetType: 'el-container',
-        title:'通用布局块',
+        targetType: "el-container",
+        title: "通用布局块",
         children: [
           {
             title: "输入框",
             targetType: "el-input",
-            config: {
-              style: {
-                width: "30%",
-                "margin-left": "50%",
-              },
-            },
           },
           {
             title: "自适应行",
@@ -60,7 +53,11 @@ export default {
         props: {},
         config: {},
       },
+      componentStyleDefinition: {},
     };
+  },
+  created() {
+    this.$store.dispatch("visualEditor/SET_CUR_COMP", this.$props);
   },
   methods: {},
   components: { UniversalComponent },

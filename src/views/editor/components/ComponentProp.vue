@@ -8,15 +8,15 @@
       <el-tab-pane label="常用样式">
         <el-collapse v-model="activeCollapse">
           <el-collapse-item
-            v-for="(styleElement, index) in componentStyleDefinition.style"
+            v-for="(styleElement, key, index) in componentStyleDefinition.style"
             :key="index"
             :name="styleElement.name"
             :title="styleElement.name"
           >
             <el-form style="padding: 0 20px 0 0; height: 100%">
               <el-col
-                v-for="(styleElementOption, index) in styleElement"
-                :key="index"
+                v-for="(styleElementOption, subKey, subIndex) in styleElement"
+                :key="subIndex"
                 :span="styleElementOption.optionSpan"
                 :offset="1"
               >
@@ -30,9 +30,10 @@
                   :label="styleElementOption.name"
                 >
                   <component
+                    v-if="curComp && curComp.config"
                     :is="styleElementOption.optionType"
                     style="width: 100%"
-                    v-model="styleElementOption.value"
+                    v-model="curComp.config.style[key][subKey]"
                   >
                     <div v-if="styleElementOption.optionType === 'el-select'">
                       <el-option
@@ -64,24 +65,28 @@
 
 <script>
 import componentStyleDefinition from "@/components/universal/config/componentStyleDefinition.js";
-import { mapGetters } from 'vuex'
+import { mapGetters } from "vuex";
 export default {
   data() {
     return {
       activeCollapse: [],
       componentStyleDefinition: componentStyleDefinition,
+      currentComponent: null,
     };
   },
   created() {
+    this.currentComponent = this.$store.getters.curComp;
+    console.log(this.currentComponent);
     this.parseComponentDef();
   },
   computed: {
-    ...mapGetters(['curComp'])
+    ...mapGetters(["curComp"]),
   },
   watch: {
-    curComp(val) {
-      console.log(val)
-    }
+    curComp(curComp) {
+      this.currentComponent = curComp;
+      console.log(curComp);
+    },
   },
   methods: {
     parseComponentDef() {

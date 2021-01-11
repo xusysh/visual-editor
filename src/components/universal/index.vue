@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import componentDefinition from "./config/componentDefinition";
+import componentStyleDefinition from "./config/componentStyleDefinition";
 import draggable from "vuedraggable";
 export default {
   name: "UniversalComponent",
@@ -94,16 +94,16 @@ export default {
       // 组件绑定class
       compClass: "",
       mouseOver: false,
+      componentStyleDefinition: {},
     };
   },
   created() {
-    this.parseConfig();
+    this.componentStyleDefinition = JSON.parse(
+      JSON.stringify(componentStyleDefinition)
+    );
+    this.parseStyle();
   },
   methods: {
-    parseConfig() {
-      // console.log(this.children);
-      console.log(componentDefinition);
-    },
     onMouseEnter(event) {
       // console.log(event);
       event.stopPropagation();
@@ -122,6 +122,22 @@ export default {
     setCurComp(event) {
       event.stopPropagation();
       this.$store.dispatch("visualEditor/SET_CUR_COMP", this.$props);
+    },
+    parseStyle() {
+      console.log(componentStyleDefinition.style);
+      const styleElements = this.componentStyleDefinition.style;
+      for (const styleElementKey in styleElements) {
+        const styleElement = styleElements[styleElementKey];
+        console.log(styleElementKey);
+        console.log(styleElement);
+        for (const styleElementOptionKey in styleElement) {
+          styleElement[styleElementOptionKey] =
+            styleElement[styleElementOptionKey].value;
+        }
+      }
+      console.log("qqq");
+      console.log(this.componentStyleDefinition);
+      this.config.style = this.componentStyleDefinition.style;
     },
   },
 };
