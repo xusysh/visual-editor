@@ -65,28 +65,25 @@
 
 <script>
 import componentStyleDefinition from "@/components/universal/config/componentStyleDefinition.js";
-import { mapGetters } from "vuex";
+import { mapGetters } from 'vuex'
 export default {
   data() {
     return {
       activeCollapse: [],
       componentStyleDefinition: componentStyleDefinition,
-      currentComponent: null,
     };
   },
   created() {
-    this.currentComponent = this.$store.getters.curComp;
-    console.log(this.currentComponent);
+    console.log(this.curComp)
     this.parseComponentDef();
   },
   computed: {
-    ...mapGetters(["curComp"]),
+    ...mapGetters(['curComp'])
   },
   watch: {
     curComp(curComp) {
-      this.currentComponent = curComp;
-      console.log(curComp);
-    },
+      console.log(curComp)
+    }
   },
   methods: {
     parseComponentDef() {

@@ -124,19 +124,14 @@ export default {
       this.$store.dispatch("visualEditor/SET_CUR_COMP", this.$props);
     },
     parseStyle() {
-      console.log(componentStyleDefinition.style);
       const styleElements = this.componentStyleDefinition.style;
       for (const styleElementKey in styleElements) {
         const styleElement = styleElements[styleElementKey];
-        console.log(styleElementKey);
-        console.log(styleElement);
         for (const styleElementOptionKey in styleElement) {
           styleElement[styleElementOptionKey] =
             styleElement[styleElementOptionKey].value;
         }
       }
-      console.log("qqq");
-      console.log(this.componentStyleDefinition);
       this.config.style = this.componentStyleDefinition.style;
     },
   },

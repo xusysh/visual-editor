@@ -57,7 +57,7 @@ export default {
     };
   },
   created() {
-    this.$store.dispatch("visualEditor/SET_CUR_COMP", this.$props);
+    this.$store.dispatch("visualEditor/SET_CUR_COMP", this.component);
   },
   methods: {},
   components: { UniversalComponent },
