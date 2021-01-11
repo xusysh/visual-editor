@@ -6,7 +6,7 @@
     class="uni-comp"
     :style="config.style"
   >
-    <div class="target-layer" v-show="mouseOver">
+    <div class="target-layer" v-show="mouseOver || selected">
       <span class="target-type">{{ title }}</span>
     </div>
     <component
@@ -94,6 +94,7 @@ export default {
       // 组件绑定class
       compClass: "",
       mouseOver: false,
+      selected: false,
       componentStyleDefinition: {},
     };
   },
@@ -102,6 +103,9 @@ export default {
       JSON.stringify(componentStyleDefinition)
     );
     this.parseStyle();
+    this.$bus.on("selectedCompChange", (comp) => {
+      this.selected = this === comp;
+    });
   },
   methods: {
     onMouseEnter(event) {
@@ -121,7 +125,9 @@ export default {
     },
     setCurComp(event) {
       event.stopPropagation();
+      this.selected = true;
       this.$store.dispatch("visualEditor/SET_CUR_COMP", this.$props);
+      this.$bus.emit("selectedCompChange", this);
     },
     parseStyle() {
       const styleElements = this.componentStyleDefinition.style;
