@@ -6,17 +6,10 @@
     class="uni-comp"
     :style="config.style"
   >
-    <div
-      style="
-        z-index: 100000; display: block; width: 100%;height:100%;opacity: 0.5;
-    background: #eee;
-    border: 1px solid #999;
-    pointer-events: none;
-    position: absolute;
-        "
-      v-show="mouseOver"
-    ></div>
-    <component :is="targetType" v-bind="props">
+    <div class="target-layer" v-show="mouseOver">
+      <span class="target-type">{{ targetType }}</span>
+    </div>
+    <component :is="targetType" v-bind="props" @click="setCurComp">
       <div v-text="config.innerText"></div>
       <div v-html="config.innerHtml"></div>
       <div v-if="children && children.length > 0">
@@ -112,6 +105,9 @@ export default {
       console.log(this.targetType + " leave");
       // this.mouseOver = false;
     },
+    setCurComp() {
+      this.$store.dispatch("SET_CUR_COMP", this.props);
+    },
   },
 };
 </script>
@@ -121,5 +117,24 @@ export default {
   &:hover {
     outline: 1px dashed #ddd !important;
   }
+}
+.target-layer {
+  z-index: 100000;
+  display: block;
+  width: 100%;
+  height: 100%;
+  opacity: 0.5;
+  background: #eee;
+  border: 1px solid #999;
+  pointer-events: none;
+  position: absolute;
+}
+.target-type {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  padding: 4px 6px;
+  background-color: rgba(180, 180, 180, 0.5);
+  border-radius: 3px;
 }
 </style>
