@@ -13,6 +13,7 @@ export default {
       component: {
         children: [
           {
+            title: "输入框",
             targetType: "el-input",
             config: {
               style: {
@@ -22,27 +23,32 @@ export default {
             },
           },
           {
+            title: "自适应行",
             targetType: "el-row",
             children: [
               {
+                title: "自适应列",
                 targetType: "el-col",
                 props: {
                   span: 12,
                 },
-                 children: [
+                children: [
                   {
+                    title: "输入框",
                     targetType: "el-input",
                   },
                 ],
               },
               {
+                title: "自适应列",
                 targetType: "el-col",
                 props: {
                   span: 6,
                 },
                 children: [
                   {
-                    targetType: "el-input",
+                    title: "选择框",
+                    targetType: "el-select",
                   },
                 ],
               },
@@ -60,5 +66,4 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style>
-</style>
+<style></style>

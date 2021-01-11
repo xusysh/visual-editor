@@ -1,6 +1,6 @@
 <template>
   <div style="height: 100%; overflow-y: auto; overflow: hidden">
-    <el-container >
+    <el-container>
       <el-header>
         <editor-header />
       </el-header>
@@ -17,7 +17,7 @@
                 "
               />
             </div>
-            <editor-canvas />
+            <editor-canvas :style="canvasStyle" class="editor-canvas" />
           </el-card>
         </el-main>
         <el-aside style="padding: 20px" width="380px">
@@ -61,11 +61,17 @@ export default {
   data() {
     return {
       compMenuCollapse: true,
+      canvasStyle: {
+        "margin-left": "220px",
+      },
     };
   },
-  methods: {
-    toggleHandler() {},
+  created() {
+    this.$bus.on("compNavCollapseChange", (collapse) => {
+      this.canvasStyle["margin-left"] = collapse ? "84px" : "220px";
+    });
   },
+  methods: {},
   components: {
     EditorHeader,
     EditorComponentList,
@@ -91,5 +97,11 @@ body,
 }
 .el-menu-vertical-demo:not(.el-menu--collapse) {
   width: 200px;
+}
+.editor-canvas {
+  transition: 0.5s;
+  -moz-transition: 0.5s, -moz-transform 0.5s; /* Firefox 4 */
+  -webkit-transition: 0.5s, -webkit-transform 0.5s; /* Safari and Chrome */
+  -o-transition: 0.5s, -o-transform 0.5s; /* Opera */
 }
 </style>

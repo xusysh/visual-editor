@@ -7,9 +7,15 @@
     :style="config.style"
   >
     <div class="target-layer" v-show="mouseOver">
-      <span class="target-type">{{ targetType }}</span>
+      <span class="target-type">{{ title }}</span>
     </div>
-    <component :is="targetType" v-bind="props" @click="setCurComp">
+    <component
+      :is="targetType"
+      v-bind="props"
+      v-model="model.value"
+      style="display: block"
+      @click="setCurComp"
+    >
       <div v-text="config.innerText"></div>
       <div v-html="config.innerHtml"></div>
       <div v-if="children && children.length > 0">
@@ -57,6 +63,13 @@ export default {
       type: Object,
       default: () => {
         return {};
+      },
+    },
+    // 组件model
+    model: {
+      type: Object,
+      default: () => {
+        return { value: null };
       },
     },
     // 组件样式及其他配置
