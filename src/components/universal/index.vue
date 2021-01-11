@@ -144,6 +144,7 @@ export default {
 }
 .target-type {
   position: absolute;
+  font-size: 8px;
   top: 0px;
   right: 0px;
   padding: 4px 6px;
