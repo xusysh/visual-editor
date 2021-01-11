@@ -14,7 +14,8 @@
       v-bind="props"
       v-model="model.value"
       style="display: block"
-      @click="setCurComp"
+      @click.native="setCurComp"
+      disabled
     >
       <div v-text="config.innerText"></div>
       <div v-html="config.innerHtml"></div>
@@ -104,22 +105,22 @@ export default {
       console.log(componentDefinition);
     },
     onMouseEnter(event) {
-      console.log(event);
+      // console.log(event);
       event.stopPropagation();
       event.preventDefault();
       this.mouseOver = true;
-      console.log(this.targetType + " enter");
+      // console.log(this.targetType + " enter");
       // this.mouseOver = true;
     },
     onMouseLeave(event) {
-      console.log(event);
+      // console.log(event);
       event.stopPropagation();
       this.mouseOver = false;
-      console.log(this.targetType + " leave");
+      // console.log(this.targetType + " leave");
       // this.mouseOver = false;
     },
     setCurComp() {
-      this.$store.dispatch("SET_CUR_COMP", this.props);
+      this.$store.dispatch("visualEditor/SET_CUR_COMP", this.props);
     },
   },
 };
@@ -150,5 +151,12 @@ export default {
   padding: 4px 6px;
   background-color: rgba(180, 180, 180, 0.5);
   border-radius: 3px;
+}
+.el-input.is-disabled /deep/ .el-input__inner {
+  cursor: default;
+  background-color: white;
+}
+.el-select /deep/ .el-input.is-disabled /deep/ .el-input__inner {
+  background-color: white;
 }
 </style>

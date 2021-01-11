@@ -1,6 +1,6 @@
 <template>
   <div style="text-align: left">
-    <universal-component target-type="div" v-bind.sync="component">
+    <universal-component v-bind.sync="component">
     </universal-component>
   </div>
 </template>
@@ -11,6 +11,8 @@ export default {
   data() {
     return {
       component: {
+        targetType: 'el-container',
+        title:'通用布局块',
         children: [
           {
             title: "输入框",

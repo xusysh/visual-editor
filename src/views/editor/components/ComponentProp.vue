@@ -64,6 +64,7 @@
 
 <script>
 import componentStyleDefinition from "@/components/universal/config/componentStyleDefinition.js";
+import { mapGetters } from 'vuex'
 export default {
   data() {
     return {
@@ -75,11 +76,12 @@ export default {
     this.parseComponentDef();
   },
   computed: {
-    currentComp() {
-      const curComp = this.$store.state.visualEditor;
-      console.log(curComp);
-      return curComp;
-    },
+    ...mapGetters(['curComp'])
+  },
+  watch: {
+    curComp(val) {
+      console.log(val)
+    }
   },
   methods: {
     parseComponentDef() {
