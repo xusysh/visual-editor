@@ -134,11 +134,16 @@ export default {
       for (const styleElementKey in styleElements) {
         const styleElement = styleElements[styleElementKey];
         for (const styleElementOptionKey in styleElement) {
-          styleElement[styleElementOptionKey] =
-            styleElement[styleElementOptionKey].value;
+          const styleName = styleElement[styleElementOptionKey].styleName;
+          if (styleName) {
+            if(!this.config.style) {
+              this.config.style = {}
+            }
+            this.config.style[styleName] =
+              styleElement[styleElementOptionKey].value;
+          }
         }
       }
-      this.config.style = this.componentStyleDefinition.style;
     },
   },
 };

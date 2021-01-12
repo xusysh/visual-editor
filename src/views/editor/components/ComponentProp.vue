@@ -30,10 +30,10 @@
                   :label="styleElementOption.name"
                 >
                   <component
-                    v-if="curComp && curComp.config"
+                    v-if="curComp && curComp.config && styleElementOption.styleName"
                     :is="styleElementOption.optionType"
                     style="width: 100%"
-                    v-model="curComp.config.style[key][subKey]"
+                    v-model="curComp.config.style[styleElementOption.styleName]"
                   >
                     <div v-if="styleElementOption.optionType === 'el-select'">
                       <el-option
@@ -51,12 +51,12 @@
         </el-collapse>
       </el-tab-pane>
       <el-tab-pane label="控件属性"> </el-tab-pane>
-      <el-tab-pane label="内嵌HTML" style="padding: 6px 20px">
+      <el-tab-pane label="其他" style="padding: 6px 20px">
         <el-input
           style="margin-top: 16px"
           type="textarea"
           :autosize="{ minRows: 16, maxRows: 200 }"
-          v-model="componentStyleDefinition.innerHtml.value"
+          v-model="componentStyleDefinition.other.innerHtml.value"
         ></el-input>
       </el-tab-pane>
     </el-tabs>
