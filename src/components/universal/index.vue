@@ -198,10 +198,12 @@ export default {
       this.componentDefinition = JSON.parse(
         JSON.stringify(componentDefinition)
       );
-      const propsDef = this.componentDefinition[this.targetType];
+      const propsDef = this.componentDefinition[comp.targetType].props;
       for (const propDefKey in propsDef) {
-        comp[propDefKey] = propsDef[propDefKey].value;
+        console.log(propsDef[propDefKey].value)
+        comp.props[propDefKey] = propsDef[propDefKey].value;
       }
+      // console.log(comp.props)
       comp.title = this.componentDefinition[comp.targetType].name;
       comp.initSelected = true;
       comp.compIndex = this.children.length;

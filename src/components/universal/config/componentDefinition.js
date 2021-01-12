@@ -36,7 +36,7 @@ export default {
     props: {
       span: {
         name: "占用栅格数",
-        value: 4
+        value: 12
       },
     }
   },
