@@ -3,9 +3,11 @@ export default {
     name: "通用布局块",
     targetComp: "div",
     isBasicComp: true,
+    isContainer: true,
   },
   responsiveRow: {
     name: "自适应行布局容器",
+    isContainer: true,
     compSource: {
       name: "组件来源",
       value: "element-ui",
@@ -24,6 +26,7 @@ export default {
   },
   responsiveCol: {
     name: "自适应列布局容器",
+    isContainer: true,
     compSource: {
       name: "组件来源",
       value: "element-ui",
@@ -34,7 +37,7 @@ export default {
       span: {
         name: "占用栅格数",
         value: 4
-      }
+      },
     }
   },
   button: {

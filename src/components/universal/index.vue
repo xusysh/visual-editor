@@ -109,6 +109,7 @@ export default {
       configDef: {},
       // 组件绑定class
       compClass: "",
+      // 该组件的定义
       compDef: {},
       mouseOver: false,
       selected: false,
@@ -117,8 +118,8 @@ export default {
     };
   },
   created() {
-    this.parseStyle();
     this.getCompDef();
+    this.parseStyle();
     this.createBusHook();
     if (this.initSelected) {
       this.$bus.emit("selectedCompChange", this);
@@ -131,20 +132,20 @@ export default {
       });
       this.$bus.on("setCompStyle", (style) => {
         if (this.selected) {
-          console.log(style);
+          // console.log(style);
           this.config.style = style;
         }
       });
       this.$bus.on("addComponent", (newComp) => {
         if (this.selected) {
-          console.log(newComp);
+          // console.log(newComp);
           this.initProp(newComp);
           this.children.push(newComp);
         }
       });
-       this.$bus.on("dropCurComp", () => {
+      this.$bus.on("dropCurComp", () => {
         if (this.selected) {
-          this.dropComp()
+          this.dropComp();
         }
       });
     },
@@ -186,6 +187,12 @@ export default {
           }
         }
       }
+      if (!this.compDef.isContainer) {
+        this.config.style["padding-top"] = "0px";
+        this.config.style["padding-bottom"] = "0px";
+        this.config.style["padding-left"] = "0px";
+        this.config.style["padding-right"] = "0px";
+      }
     },
     initProp(comp) {
       this.componentDefinition = JSON.parse(
@@ -217,9 +224,10 @@ export default {
 <style scoped lang="scss">
 .uni-comp {
   position: relative;
-  &:hover {
-    outline: 1px dashed #ddd !important;
-  }
+  outline: 1px dashed #ddd !important;
+  // &:hover {
+  //   outline: 1px dashed #ddd !important;
+  // }
 }
 .target-layer {
   z-index: 9999;
