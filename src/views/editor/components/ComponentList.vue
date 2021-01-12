@@ -61,7 +61,7 @@ export default {
     },
     handleSelect() {},
     addComponent(componentDef) {
-      this.$bus.emit("addComponent", componentDef);
+      this.$bus.emit("addComponent", JSON.parse(JSON.stringify(componentDef)));
     },
   },
 };

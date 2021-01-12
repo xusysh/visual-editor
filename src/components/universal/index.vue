@@ -75,6 +75,10 @@ export default {
         };
       },
     },
+    initSelected: {
+      type: Boolean,
+      default: false,
+    },
   },
   components: { draggable },
   data() {
@@ -96,6 +100,9 @@ export default {
     this.parseStyle();
     this.getCompDef();
     this.createBusHook();
+    if (this.initSelected) {
+      this.$bus.emit("selectedCompChange", this);
+    }
   },
   methods: {
     createBusHook() {
@@ -111,7 +118,6 @@ export default {
       this.$bus.on("addComponent", (newComp) => {
         if (this.selected) {
           console.log(newComp);
-          newComp.title = componentDefinition[this.targetType].name;
           this.initProp(newComp);
           this.children.push(newComp);
         }
@@ -167,6 +173,8 @@ export default {
       for (const propDefKey in propsDef) {
         comp[propDefKey] = propsDef[propDefKey].value;
       }
+      comp.title = this.componentDefinition[comp.targetType].name;
+      comp.initSelected = true;
     },
     getCompDef() {
       this.compDef = componentDefinition[this.targetType];
