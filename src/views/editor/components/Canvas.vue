@@ -11,64 +11,8 @@ export default {
   data() {
     return {
       component: {
-        targetType: "div",
-        title: "通用布局块",
-        children: [
-          {
-            title: "自适应行",
-            targetType: "responsiveRow",
-            config: {
-              style: {
-                width: "100%",
-              },
-            },
-            children: [
-              {
-                title: "输入框",
-                targetType: "input",
-                config: {
-                  style: {
-                    width: "100%",
-                  },
-                },
-              },
-            ],
-          },
-          {
-            title: "自适应行",
-            targetType: "responsiveRow",
-            children: [
-              {
-                title: "自适应列",
-                targetType: "responsiveCol",
-                props: {
-                  span: 12,
-                },
-                children: [
-                  {
-                    title: "输入框",
-                    targetType: "input",
-                  },
-                ],
-              },
-              {
-                title: "自适应列",
-                targetType: "responsiveCol",
-                props: {
-                  span: 6,
-                },
-                children: [
-                  {
-                    title: "选择框",
-                    targetType: "select",
-                  },
-                ],
-              },
-            ],
-          },
-        ],
-        props: {},
-        config: {},
+        targetType: "responsiveRow",
+        title: '自适应行布局容器'
       },
       componentStyleDefinition: {},
     };

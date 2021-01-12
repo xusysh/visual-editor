@@ -1,5 +1,36 @@
 export default {
   style: {
+    size: {
+      name: '尺寸',
+      width: {
+        name: "宽度",
+        styleName: "width",
+        value: "",
+        optionType: "el-input",
+        optionSpan: 11
+      },
+      height: {
+        name: "高度",
+        styleName: "height",
+        value: "",
+        optionType: "el-input",
+        optionSpan: 11
+      },
+      minWidth: {
+        name: "最小宽度",
+        styleName: "min-width",
+        value: "20px",
+        optionType: "el-input",
+        optionSpan: 11
+      },
+      minHeight: {
+        name: "最小高度",
+        styleName: "min-height",
+        value: "20px",
+        optionType: "el-input",
+        optionSpan: 11
+      },
+    },
     margin: {
       name: "外边距",
       top: {

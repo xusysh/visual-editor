@@ -9,13 +9,7 @@
         <el-main>
           <el-card style="height: 98%" class="box-card">
             <div style="text-align: left; height: 100%">
-              <editor-component-list
-                style="
-                  position: fixed;
-                  height: calc(100% - 160px);
-                  overflow: auto;
-                "
-              />
+              <editor-component-list class="editor-component-list" />
             </div>
             <editor-canvas :style="canvasStyle" class="editor-canvas" />
           </el-card>
@@ -27,7 +21,7 @@
             :body-style="{ padding: '0px', height: '90%' }"
           >
             <div slot="header" class="clearfix" style="text-align: left">
-              <span>组件编辑（{{curCompTitle}}）</span>
+              <span>组件编辑（{{ curCompTitle }}）</span>
             </div>
             <div style="text-align: left; height: 100%">
               <editor-component-prop />
@@ -64,7 +58,7 @@ export default {
       canvasStyle: {
         "margin-left": "220px",
       },
-      curCompTitle: ''
+      curCompTitle: "",
     };
   },
   created() {
@@ -107,5 +101,24 @@ body,
   -moz-transition: 0.5s, -moz-transform 0.5s; /* Firefox 4 */
   -webkit-transition: 0.5s, -webkit-transform 0.5s; /* Safari and Chrome */
   -o-transition: 0.5s, -o-transform 0.5s; /* Opera */
+}
+.editor-component-list {
+  position: fixed;
+  height: calc(100% - 160px);
+  overflow: auto;
+}
+.editor-component-list::-webkit-scrollbar {
+  width: 6px; 
+  height: 1px;
+}
+.editor-component-list::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+  background: #535353;
+}
+.editor-component-list::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  background: #ededed;
 }
 </style>

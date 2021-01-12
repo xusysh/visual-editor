@@ -14,8 +14,11 @@ export default {
     targetComp: "el-row",
     props: {
       gutter: {
-        name: "列间隔（栅格数）",
-        value: 0
+        name: "列间隔",
+        labelWidth: "60px",
+        value: 0,
+        optionType: "el-input",
+        optionSpan: 23
       }
     }
   },

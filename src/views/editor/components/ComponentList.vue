@@ -1,7 +1,6 @@
 <template>
   <div>
     <el-menu
-      class="el-menu-vertical-demo"
       :default-openeds="['0']"
       @select="handleSelect"
       :collapse="compMenuCollapse"
@@ -17,6 +16,7 @@
         </template>
         <el-menu-item
           v-for="(component, subIndex) in componentCatagory.components"
+          @click="addComponent(component)"
           :key="subIndex"
           :index="`${index}-${subIndex}`"
         >
@@ -35,7 +35,8 @@ export default {
   data() {
     return {
       compMenuCollapse: false,
-      componentCatagoryList: componentCatagoryList,
+      componentCatagoryList: [],
+      componentDefinition: {}
     };
   },
   created() {
@@ -46,14 +47,22 @@ export default {
   },
   methods: {
     getCompDef() {
-      for (const componentCatagory of componentCatagoryList) {
+      this.componentCatagoryList = JSON.parse(JSON.stringify(componentCatagoryList))
+      this.componentDefinition = JSON.parse(JSON.stringify(componentDefinition))
+      for (const componentCatagory of this.componentCatagoryList) {
         componentCatagory.components = componentCatagory.components.map(
-          (item) => componentDefinition[item]
+          (targetType) => {
+            const targetTypeDef = this.componentDefinition[targetType];
+            return { targetType, ...targetTypeDef };
+          }
         );
       }
       console.log(componentCatagoryList);
     },
     handleSelect() {},
+    addComponent(componentDef) {
+      this.$bus.emit("addComponent", componentDef);
+    },
   },
 };
 </script>

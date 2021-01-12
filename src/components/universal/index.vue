@@ -89,25 +89,34 @@ export default {
       mouseOver: false,
       selected: false,
       componentStyleDefinition: {},
+      componentDefinition: {},
     };
   },
   created() {
-    this.componentStyleDefinition = JSON.parse(
-      JSON.stringify(componentStyleDefinition)
-    );
     this.parseStyle();
     this.getCompDef();
-    this.$bus.on("selectedCompChange", (comp) => {
-      this.selected = this === comp;
-    });
-    this.$bus.on("setCompStyle", (style) => {
-      if (this.selected) {
-        console.log(style);
-        this.config.style = style;
-      }
-    });
+    this.createBusHook();
   },
   methods: {
+    createBusHook() {
+      this.$bus.on("selectedCompChange", (comp) => {
+        this.selected = this === comp;
+      });
+      this.$bus.on("setCompStyle", (style) => {
+        if (this.selected) {
+          console.log(style);
+          this.config.style = style;
+        }
+      });
+      this.$bus.on("addComponent", (newComp) => {
+        if (this.selected) {
+          console.log(newComp);
+          newComp.title = componentDefinition[this.targetType].name;
+          this.initProp(newComp);
+          this.children.push(newComp);
+        }
+      });
+    },
     onMouseEnter(event) {
       // console.log(event);
       event.stopPropagation();
@@ -130,6 +139,9 @@ export default {
       this.$bus.emit("selectedCompChange", this);
     },
     parseStyle() {
+      this.componentStyleDefinition = JSON.parse(
+        JSON.stringify(componentStyleDefinition)
+      );
       const styleElements = this.componentStyleDefinition.style;
       for (const styleElementKey in styleElements) {
         const styleElement = styleElements[styleElementKey];
@@ -147,10 +159,19 @@ export default {
         }
       }
     },
+    initProp(comp) {
+      this.componentDefinition = JSON.parse(
+        JSON.stringify(componentDefinition)
+      );
+      const propsDef = this.componentDefinition[this.targetType];
+      for (const propDefKey in propsDef) {
+        comp[propDefKey] = propsDef[propDefKey].value;
+      }
+    },
     getCompDef() {
-      this.compDef = componentDefinition[this.targetType]
-      console.log(this.compDef)
-    }
+      this.compDef = componentDefinition[this.targetType];
+      // this.title = this.compDef.name;
+    },
   },
 };
 </script>
