@@ -5,28 +5,28 @@ export default {
       top: {
         name: "上",
         styleName: 'margin-top',
-        value: "10px",
+        value: "0px",
         optionType: "el-input",
         optionSpan: 11
       },
       bottom: {
         name: "下",
         styleName: 'margin-bottom',
-        value: "10px",
+        value: "0px",
         optionType: "el-input",
         optionSpan: 11
       },
       left: {
         name: "左",
         styleName: 'margin-left',
-        value: "10px",
+        value: "0px",
         optionType: "el-input",
         optionSpan: 11
       },
       right: {
         name: "右",
         styleName: 'margin-right',
-        value: "10px",
+        value: "0px",
         optionType: "el-input",
         optionSpan: 11
       }
@@ -82,7 +82,7 @@ export default {
       width: {
         name: "宽度",
         styleName: 'border-width',
-        value: "10px",
+        value: "1px",
         optionType: "el-input",
         optionSpan: 11
       },

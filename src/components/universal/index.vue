@@ -1,36 +1,27 @@
 <template>
-  <div
-    style="position: relative"
-    @mouseover="onMouseEnter"
-    @mouseout="onMouseLeave"
-    class="uni-comp"
+  <component
+    :is="targetType"
+    v-bind="props"
+    v-model="model.value"
     :style="config.style"
+    class="uni-comp"
+    @click.native="setCurComp"
+    @mouseover.native="onMouseEnter"
+    @mouseout.native="onMouseLeave"
+    disabled
   >
     <div class="target-layer" v-show="mouseOver || selected">
       <span class="target-type">{{ title }}</span>
     </div>
-    <component
-      :is="targetType"
-      v-bind="props"
-      v-model="model.value"
-      style="display: block"
-      @click.native="setCurComp"
-      disabled
+    <div v-text="config.innerText"></div>
+    <div v-html="config.innerHtml"></div>
+    <universal-component
+      v-for="(child, index) in children"
+      :key="index"
+      v-bind="child"
     >
-      <div v-text="config.innerText"></div>
-      <div v-html="config.innerHtml"></div>
-      <div v-if="children && children.length > 0">
-        <draggable class="list-group" :list="children">
-          <universal-component
-            v-for="(child, index) in children"
-            :key="index"
-            v-bind="child"
-          >
-          </universal-component>
-        </draggable>
-      </div>
-    </component>
-  </div>
+    </universal-component>
+  </component>
 </template>
 
 <script>
@@ -106,6 +97,12 @@ export default {
     this.$bus.on("selectedCompChange", (comp) => {
       this.selected = this === comp;
     });
+    this.$bus.on("setCompStyle", (style) => {
+      if (this.selected) {
+        console.log(style);
+        this.config.style = style;
+      }
+    });
   },
   methods: {
     onMouseEnter(event) {
@@ -126,7 +123,7 @@ export default {
     setCurComp(event) {
       event.stopPropagation();
       this.selected = true;
-      this.$store.dispatch("visualEditor/SET_CUR_COMP", this.$props);
+      // this.$store.dispatch("visualEditor/SET_CUR_COMP", this.$props);
       this.$bus.emit("selectedCompChange", this);
     },
     parseStyle() {
@@ -136,11 +133,13 @@ export default {
         for (const styleElementOptionKey in styleElement) {
           const styleName = styleElement[styleElementOptionKey].styleName;
           if (styleName) {
-            if(!this.config.style) {
-              this.config.style = {}
+            if (!this.config.style) {
+              this.config.style = {};
             }
-            this.config.style[styleName] =
-              styleElement[styleElementOptionKey].value;
+            if (!this.config.style[styleName]) {
+              this.config.style[styleName] =
+                styleElement[styleElementOptionKey].value;
+            }
           }
         }
       }
@@ -151,15 +150,18 @@ export default {
 
 <style scoped lang="scss">
 .uni-comp {
+  position: relative;
   &:hover {
     outline: 1px dashed #ddd !important;
   }
 }
 .target-layer {
-  z-index: 100000;
-  display: block;
-  width: 100%;
-  height: 100%;
+  z-index: 9999999;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
   opacity: 0.5;
   background: #eee;
   border: 1px solid #999;

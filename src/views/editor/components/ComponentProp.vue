@@ -30,7 +30,7 @@
                   :label="styleElementOption.name"
                 >
                   <component
-                    v-if="curComp && curComp.config && styleElementOption.styleName"
+                    v-if="styleElementOption.styleName"
                     :is="styleElementOption.optionType"
                     style="width: 100%"
                     v-model="curComp.config.style[styleElementOption.styleName]"
@@ -65,25 +65,34 @@
 
 <script>
 import componentStyleDefinition from "@/components/universal/config/componentStyleDefinition.js";
-import { mapGetters } from 'vuex'
 export default {
   data() {
     return {
       activeCollapse: [],
-      componentStyleDefinition: componentStyleDefinition,
+      componentStyleDefinition: {},
+      curComp: {
+        config: {
+          style: {},
+        },
+      },
     };
   },
   created() {
-    console.log(this.curComp)
-    this.parseComponentDef();
-  },
-  computed: {
-    ...mapGetters(['curComp'])
+    this.componentStyleDefinition = JSON.parse(
+      JSON.stringify(componentStyleDefinition)
+    );
+    this.$bus.on("selectedCompChange", (comp) => {
+      this.curComp = JSON.parse(JSON.stringify(comp.$props));
+      this.parseComponentDef();
+    });
   },
   watch: {
-    curComp(curComp) {
-      console.log(curComp)
-    }
+    curComp: {
+      handler(curComp) {
+        this.$bus.emit("setCompStyle", curComp.config.style);
+      },
+      deep: true,
+    },
   },
   methods: {
     parseComponentDef() {
@@ -91,6 +100,7 @@ export default {
         this.componentStyleDefinition.style
       ).map((item) => item.name);
     },
+    setCurCompConf() {},
   },
   components: {},
 };

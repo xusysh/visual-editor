@@ -1,6 +1,7 @@
 <template>
   <div style="text-align: left">
-    <universal-component v-bind.sync="component"> </universal-component>
+    <universal-component ref="initialComponent" v-bind.sync="component">
+    </universal-component>
   </div>
 </template>
 
@@ -14,8 +15,24 @@ export default {
         title: "通用布局块",
         children: [
           {
-            title: "输入框",
-            targetType: "el-input",
+            title: "自适应行",
+            targetType: "el-row",
+            config: {
+              style: {
+                width: "100%",
+              },
+            },
+            children: [
+              {
+                title: "输入框",
+                targetType: "el-input",
+                config: {
+                  style: {
+                    width: "100%",
+                  },
+                },
+              },
+            ],
           },
           {
             title: "自适应行",
@@ -57,7 +74,10 @@ export default {
     };
   },
   created() {
-    this.$store.dispatch("visualEditor/SET_CUR_COMP", this.component);
+    // this.$store.dispatch("visualEditor/SET_CUR_COMP", this.component);
+  },
+  mounted() {
+    this.$bus.emit("selectedCompChange", this.$refs.initialComponent);
   },
   methods: {},
   components: { UniversalComponent },
