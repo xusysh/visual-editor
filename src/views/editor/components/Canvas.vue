@@ -11,12 +11,12 @@ export default {
   data() {
     return {
       component: {
-        targetType: "el-container",
+        targetType: "div",
         title: "通用布局块",
         children: [
           {
             title: "自适应行",
-            targetType: "el-row",
+            targetType: "responsiveRow",
             config: {
               style: {
                 width: "100%",
@@ -25,7 +25,7 @@ export default {
             children: [
               {
                 title: "输入框",
-                targetType: "el-input",
+                targetType: "input",
                 config: {
                   style: {
                     width: "100%",
@@ -36,31 +36,31 @@ export default {
           },
           {
             title: "自适应行",
-            targetType: "el-row",
+            targetType: "responsiveRow",
             children: [
               {
                 title: "自适应列",
-                targetType: "el-col",
+                targetType: "responsiveCol",
                 props: {
                   span: 12,
                 },
                 children: [
                   {
                     title: "输入框",
-                    targetType: "el-input",
+                    targetType: "input",
                   },
                 ],
               },
               {
                 title: "自适应列",
-                targetType: "el-col",
+                targetType: "responsiveCol",
                 props: {
                   span: 6,
                 },
                 children: [
                   {
                     title: "选择框",
-                    targetType: "el-select",
+                    targetType: "select",
                   },
                 ],
               },

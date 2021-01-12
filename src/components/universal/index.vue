@@ -1,6 +1,6 @@
 <template>
   <component
-    :is="targetType"
+    :is="compDef.targetComp"
     v-bind="props"
     v-model="model.value"
     :style="config.style"
@@ -26,6 +26,7 @@
 
 <script>
 import componentStyleDefinition from "./config/componentStyleDefinition";
+import componentDefinition from "./config/componentDefinition";
 import draggable from "vuedraggable";
 export default {
   name: "UniversalComponent",
@@ -84,6 +85,7 @@ export default {
       configDef: {},
       // 组件绑定class
       compClass: "",
+      compDef: {},
       mouseOver: false,
       selected: false,
       componentStyleDefinition: {},
@@ -94,6 +96,7 @@ export default {
       JSON.stringify(componentStyleDefinition)
     );
     this.parseStyle();
+    this.getCompDef();
     this.$bus.on("selectedCompChange", (comp) => {
       this.selected = this === comp;
     });
@@ -144,6 +147,10 @@ export default {
         }
       }
     },
+    getCompDef() {
+      this.compDef = componentDefinition[this.targetType]
+      console.log(this.compDef)
+    }
   },
 };
 </script>

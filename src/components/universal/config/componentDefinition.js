@@ -1,6 +1,8 @@
 export default {
   div: {
-    name: "通用布局块"
+    name: "通用布局块",
+    targetComp: "div",
+    isBasicComp: true,
   },
   responsiveRow: {
     name: "自适应行布局容器",
@@ -40,6 +42,16 @@ export default {
       optionType: "el-select"
     },
     targetComp: "el-button",
+    props: {}
+  },
+  input: {
+    name: "输入框",
+    compSource: {
+      name: "组件来源",
+      value: "element-ui",
+      optionType: "el-input"
+    },
+    targetComp: "el-input",
     props: {}
   },
   select: {

@@ -27,7 +27,7 @@
             :body-style="{ padding: '0px', height: '90%' }"
           >
             <div slot="header" class="clearfix" style="text-align: left">
-              <span>组件编辑</span>
+              <span>组件编辑（{{curCompTitle}}）</span>
             </div>
             <div style="text-align: left; height: 100%">
               <editor-component-prop />
@@ -64,11 +64,15 @@ export default {
       canvasStyle: {
         "margin-left": "220px",
       },
+      curCompTitle: ''
     };
   },
   created() {
     this.$bus.on("compNavCollapseChange", (collapse) => {
       this.canvasStyle["margin-left"] = collapse ? "84px" : "220px";
+    });
+    this.$bus.on("selectedCompChange", (comp) => {
+      this.curCompTitle = comp.$props.title;
     });
   },
   methods: {},
