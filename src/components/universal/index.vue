@@ -11,7 +11,15 @@
     disabled
   >
     <div class="target-layer" v-show="mouseOver || selected">
-      <span class="target-type">{{ title }}</span>
+      <div class="target-type">
+        {{ title }}&nbsp;
+        <!-- <i
+          v-show="!isRootComp"
+          class="el-icon-delete"
+          style="cursor: pointer"
+          @click="dropComp"
+        /> -->
+      </div>
     </div>
     <div v-text="config.innerText"></div>
     <div v-html="config.innerHtml"></div>
@@ -19,6 +27,7 @@
       v-for="(child, index) in children"
       :key="index"
       v-bind="child"
+      @dropChild="dropChild"
     >
     </universal-component>
   </component>
@@ -75,9 +84,20 @@ export default {
         };
       },
     },
+    // 初始时是否选中
     initSelected: {
       type: Boolean,
       default: false,
+    },
+    // 是否为根组件
+    isRootComp: {
+      type: Boolean,
+      default: false,
+    },
+    // 父组件删除子组件用
+    compIndex: {
+      type: Number,
+      default: 0,
     },
   },
   components: { draggable },
@@ -122,6 +142,11 @@ export default {
           this.children.push(newComp);
         }
       });
+       this.$bus.on("dropCurComp", () => {
+        if (this.selected) {
+          this.dropComp()
+        }
+      });
     },
     onMouseEnter(event) {
       // console.log(event);
@@ -154,9 +179,6 @@ export default {
         for (const styleElementOptionKey in styleElement) {
           const styleName = styleElement[styleElementOptionKey].styleName;
           if (styleName) {
-            if (!this.config.style) {
-              this.config.style = {};
-            }
             if (!this.config.style[styleName]) {
               this.config.style[styleName] =
                 styleElement[styleElementOptionKey].value;
@@ -175,10 +197,18 @@ export default {
       }
       comp.title = this.componentDefinition[comp.targetType].name;
       comp.initSelected = true;
+      comp.compIndex = this.children.length;
     },
     getCompDef() {
       this.compDef = componentDefinition[this.targetType];
       // this.title = this.compDef.name;
+    },
+    dropComp() {
+      this.$emit("dropChild", this.compIndex);
+      this.$bus.emit("selectedCompChange", this);
+    },
+    dropChild(index) {
+      this.children.splice(index, 1);
     },
   },
 };
@@ -192,7 +222,7 @@ export default {
   }
 }
 .target-layer {
-  z-index: 9999999;
+  z-index: 9999;
   position: absolute;
   top: 0;
   bottom: 0;
@@ -205,11 +235,12 @@ export default {
   position: absolute;
 }
 .target-type {
+  z-index: 99999;
   position: absolute;
-  font-size: 8px;
   top: 0px;
   right: 0px;
   padding: 4px 6px;
+  font-size: 8px;
   background-color: rgba(180, 180, 180, 0.5);
   border-radius: 3px;
 }

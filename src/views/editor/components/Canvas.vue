@@ -1,6 +1,6 @@
 <template>
   <div style="text-align: left">
-    <universal-component ref="initialComponent" v-bind.sync="component">
+    <universal-component ref="initialComponent" v-bind.sync="component" :is-root-comp="true">
     </universal-component>
   </div>
 </template>

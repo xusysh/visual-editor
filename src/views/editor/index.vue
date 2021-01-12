@@ -21,7 +21,13 @@
             :body-style="{ padding: '0px', height: '90%' }"
           >
             <div slot="header" class="clearfix" style="text-align: left">
-              <span>组件编辑（{{ curCompTitle }}）</span>
+              <span>组件编辑（{{ curComp.title }}）</span>
+              <i
+                v-show="!curComp.isRootComp"
+                class="el-icon-delete"
+                style="float:right;padding-top:3px;cursor: pointer"
+                @click="dropCurComp"
+              />
             </div>
             <div style="text-align: left; height: 100%">
               <editor-component-prop />
@@ -58,7 +64,7 @@ export default {
       canvasStyle: {
         "margin-left": "220px",
       },
-      curCompTitle: "",
+      curComp: "",
     };
   },
   created() {
@@ -66,10 +72,14 @@ export default {
       this.canvasStyle["margin-left"] = collapse ? "84px" : "220px";
     });
     this.$bus.on("selectedCompChange", (comp) => {
-      this.curCompTitle = comp.$props.title;
+      this.curComp = comp;
     });
   },
-  methods: {},
+  methods: {
+    dropCurComp() {
+      this.$bus.emit("dropCurComp");
+    },
+  },
   components: {
     EditorHeader,
     EditorComponentList,
@@ -108,7 +118,7 @@ body,
   overflow: auto;
 }
 .editor-component-list::-webkit-scrollbar {
-  width: 6px; 
+  width: 6px;
   height: 1px;
 }
 .editor-component-list::-webkit-scrollbar-thumb {
