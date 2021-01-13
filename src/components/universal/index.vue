@@ -8,20 +8,11 @@
     @click.native="setCurComp"
     @mouseover.native="onMouseEnter"
     @mouseout.native="onMouseLeave"
-    disabled
   >
     <div class="target-layer" v-show="mouseOver || selected">
-      <div class="target-type">
-        {{ title }}&nbsp;
-        <!-- <i
-          v-show="!isRootComp"
-          class="el-icon-delete"
-          style="cursor: pointer"
-          @click="dropComp"
-        /> -->
-      </div>
+      <div class="target-type">{{ title }}&nbsp;</div>
     </div>
-    <div v-text="config.innerText"></div>
+    <span v-text="config.innerText"></span>
     <div v-html="config.innerHtml"></div>
     <universal-component
       v-for="(child, index) in children"
@@ -141,6 +132,14 @@ export default {
       });
       this.$bus.on("addComponent", (newComp) => {
         if (this.selected) {
+          console.log(this)
+          if (!this.compDef.isContainer) {
+            this.$message({
+              message: "当前选中组件非容器，不能嵌套组件",
+              type: "warning",
+            });
+            return;
+          }
           this.initProp(newComp);
           this.children.push(newComp);
         }
@@ -190,10 +189,10 @@ export default {
         }
       }
       if (!this.compDef.isContainer) {
-        this.config.style["padding-top"] = "0px";
-        this.config.style["padding-bottom"] = "0px";
-        this.config.style["padding-left"] = "0px";
-        this.config.style["padding-right"] = "0px";
+        this.config.style["padding-top"] = "";
+        this.config.style["padding-bottom"] = "";
+        this.config.style["padding-left"] = "";
+        this.config.style["padding-right"] = "";
       }
     },
     initProp(comp) {
@@ -208,6 +207,11 @@ export default {
       comp.title = this.componentDefinition[comp.targetType].name;
       comp.initSelected = true;
       comp.compIndex = this.children.length;
+      comp.config = {
+        style: {},
+        class: {},
+        innerText: this.componentDefinition[comp.targetType].innerText,
+      };
     },
     getCompDef() {
       this.compDef = componentDefinition[this.targetType];
@@ -215,10 +219,10 @@ export default {
     },
     dropComp() {
       this.$emit("dropChild", this.compIndex);
-      this.$bus.emit("selectedCompChange", this);
     },
     dropChild(index) {
       this.children.splice(index, 1);
+      this.$bus.emit("selectedCompChange", this);
     },
   },
 };

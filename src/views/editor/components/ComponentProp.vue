@@ -87,7 +87,7 @@
       </el-tab-pane>
       <el-tab-pane label="其他" style="padding: 6px 20px">
         <el-form style="padding: 20px 0 0 0; height: 100%">
-          <el-form-item label-width="80px" label="元素属性">
+          <el-form-item label-width="80px" label="元素类型">
             <el-input
               :autosize="{ minRows: 16, maxRows: 200 }"
               v-model="componentStyleDefinition.other.innerHtml.value"

@@ -17,9 +17,42 @@ export default {
     props: {
       gutter: {
         name: "列间隔",
-        labelWidth: "60px",
+        labelWidth: "80px",
         value: 0,
         optionType: "el-input-number",
+        optionSpan: 23
+      },
+      justify: {
+        name: "水平排列",
+        labelWidth: "80px",
+        value: "start",
+        optionType: "el-select",
+        options: [
+          { label: "左对齐", value: "start" },
+          { label: "右对齐", value: "end" },
+          { label: "居中", value: "center" },
+          { label: "两端等边距", value: "space-around" },
+          { label: "两端无边距", value: "space-between" },
+        ],
+        optionSpan: 23
+      },
+      align: {
+        name: "垂直排列",
+        labelWidth: "80px",
+        value: "top",
+        optionType: "el-select",
+        options: [
+          { label: "顶部", value: "top" },
+          { label: "中部", value: "middle" },
+          { label: "底部", value: "bottom" },
+        ],
+        optionSpan: 23
+      },
+      tag: {
+        name: "元素标签",
+        labelWidth: "80px",
+        value: "div",
+        optionType: "el-input",
         optionSpan: 23
       }
     }
@@ -35,9 +68,30 @@ export default {
     targetComp: "el-col",
     props: {
       span: {
-        name: "栅格数",
-        labelWidth: "60px",
+        name: "占用栅格",
+        labelWidth: "80px",
         value: 12,
+        optionType: "el-input-number",
+        optionSpan: 23
+      },
+      offset: {
+        name: "栅格偏移",
+        labelWidth: "80px",
+        value: 0,
+        optionType: "el-input-number",
+        optionSpan: 23
+      },
+      push: {
+        name: "栅格右移",
+        labelWidth: "80px",
+        value: 0,
+        optionType: "el-input-number",
+        optionSpan: 23
+      },
+      pull: {
+        name: "栅格左移",
+        labelWidth: "80px",
+        value: 0,
         optionType: "el-input-number",
         optionSpan: 23
       },
@@ -45,13 +99,78 @@ export default {
   },
   button: {
     name: "按钮",
+    innerText: "自定义按钮",
     compSource: {
       name: "组件来源",
       value: "element-ui",
       optionType: "el-select"
     },
     targetComp: "el-button",
-    props: {}
+    props: {
+      size: {
+        name: "尺寸",
+        labelWidth: "60px",
+        value: "medium",
+        optionType: "el-select",
+        options: [
+          { label: "大", value: "big" },
+          { label: "中", value: "medium" },
+          { label: "小", value: "mini" },
+        ],
+        optionSpan: 11
+      },
+      type: {
+        name: "类型",
+        labelWidth: "60px",
+        value: "default",
+        optionType: "el-select",
+        options: [
+          { label: "默认", value: "default" },
+          { label: "主要", value: "primary" },
+          { label: "成功", value: "success" },
+          { label: "警告", value: "warning" },
+          { label: "危险", value: "danger" },
+          { label: "通知", value: "info" },
+          { label: "文字", value: "text" },
+        ],
+        optionSpan: 11
+      },
+      round: {
+        name: "圆角",
+        labelWidth: "60px",
+        value: false,
+        optionType: "el-switch",
+        optionSpan: 11
+      },
+      plain: {
+        name: "朴素",
+        labelWidth: "60px",
+        value: false,
+        optionType: "el-switch",
+        optionSpan: 11
+      },
+      circle: {
+        name: "圆形",
+        labelWidth: "60px",
+        value: false,
+        optionType: "el-switch",
+        optionSpan: 11
+      },
+      autofocus: {
+        name: "聚焦",
+        labelWidth: "60px",
+        value: false,
+        optionType: "el-switch",
+        optionSpan: 11
+      },
+      icon: {
+        name: "图标",
+        labelWidth: "60px",
+        value: "",
+        optionType: "el-input",
+        optionSpan: 23
+      },
+    }
   },
   input: {
     name: "输入框",
@@ -61,7 +180,73 @@ export default {
       optionType: "el-input"
     },
     targetComp: "el-input",
-    props: {}
+    props: {
+      type: {
+        name: "类型",
+        labelWidth: "80px",
+        value: "text",
+        optionType: "el-select",
+        options: [
+          { label: "默认", value: "text" },
+          { label: "滑块", value: "range" },
+          { label: "文本框", value: "primary" },
+          { label: "密码框", value: "password" },
+          { label: "单选框", value: "radio" },
+          { label: "多选框", value: "checkbox" },
+          { label: "表单提交", value: "submit" },
+        ],
+        optionSpan: 23
+      },
+      maxlength: {
+        name: "最大长度",
+        labelWidth: "80px",
+        value: 100,
+        optionType: "el-input-number",
+        optionSpan: 23
+      },
+      minlength: {
+        name: "最小长度",
+        labelWidth: "80px",
+        value: 0,
+        optionType: "el-input-number",
+        optionSpan: 23
+      },
+      showWordLimit: {
+        name: "字数统计",
+        labelWidth: "80px",
+        value: true,
+        optionType: "el-switch",
+        optionSpan: 11
+      },
+      showPassword: {
+        name: "显示密码",
+        labelWidth: "80px",
+        value: false,
+        optionType: "el-switch",
+        optionSpan: 11
+      },
+      readonly: {
+        name: "只读",
+        labelWidth: "80px",
+        value: false,
+        optionType: "el-switch",
+        optionSpan: 11
+      },
+      clearable: {
+        name: "可清空",
+        labelWidth: "80px",
+        value: false,
+        optionType: "el-switch",
+        optionSpan: 11
+      },
+      placeholder: {
+        name: "占位文本",
+        labelWidth: "80px",
+        value: "请输入文字",
+        optionType: "el-input",
+        optionSpan: 23
+      },
+    }
   },
   select: {
     name: "选择器",

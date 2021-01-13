@@ -15,7 +15,7 @@ export default {
         value: "20px",
         optionType: "el-input",
         optionSpan: 12,
-        labelWidth: "80px",
+        labelWidth: "76px",
       },
       height: {
         name: "高度",
@@ -30,7 +30,7 @@ export default {
         value: "20px",
         optionType: "el-input",
         optionSpan: 12,
-        labelWidth: "80px",
+        labelWidth: "76px",
       },
     },
     margin: {
