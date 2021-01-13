@@ -52,6 +52,19 @@
       </el-tab-pane>
       <el-tab-pane label="控件属性">
         <el-form style="padding: 20px 20px 0 0; height: 100%">
+          <el-col :span="23" :offset="1">
+            <el-form-item
+              label-width="80px"
+              v-show="!componentDefinition[curComp.targetType].isBasicComp"
+              :label="componentDefinition[curComp.targetType].compSource.name"
+            >
+              <el-select
+                style="width: 100%"
+                v-model="componentDefinition[curComp.targetType].compSource.value"
+                disabled
+              />
+            </el-form-item>
+          </el-col>
           <el-col
             v-for="(propOption, key, index) in componentDefinition[
               curComp.targetType

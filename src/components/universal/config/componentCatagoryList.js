@@ -7,7 +7,7 @@ export default [
   {
     title: "表单组件",
     icon: "el-icon-document",
-    components: ["button", "input", "select"]
+    components: ["button", "input", "select", "checkbox"]
   },
   {
     title: "数据展示",

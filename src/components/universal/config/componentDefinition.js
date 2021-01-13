@@ -246,6 +246,64 @@ export default {
         optionType: "el-input",
         optionSpan: 23
       },
+      prefixIcon: {
+        name: "头部图标",
+        labelWidth: "80px",
+        value: "",
+        optionType: "el-input",
+        optionSpan: 23
+      }
+    }
+  },
+  checkbox: {
+    name: "多选框",
+    compSource: {
+      name: "组件来源",
+      value: "element-ui",
+      optionType: "el-input"
+    },
+    targetComp: "el-checkbox",
+    props: {
+      size: {
+        name: "尺寸",
+        labelWidth: "80px",
+        value: "medium",
+        optionType: "el-select",
+        options: [
+          { label: "中等", value: "medium" },
+          { label: "小", value: "snall" },
+          { label: "迷你", value: "mini" },
+        ],
+        optionSpan: 23
+      },      
+      border: {
+        name: "边框",
+        labelWidth: "80px",
+        value: false,
+        optionType: "el-switch",
+        optionSpan: 11
+      },
+      checked: {
+        name: "勾选",
+        labelWidth: "80px",
+        value: false,
+        optionType: "el-switch",
+        optionSpan: 11
+      },
+      trueLabel: {
+        name: "选中值",
+        labelWidth: "80px",
+        value: "checked",
+        optionType: "el-input",
+        optionSpan: 23
+      },
+      falseLabel: {
+        name: "不选值",
+        labelWidth: "80px",
+        value: "unchecked",
+        optionType: "el-input",
+        optionSpan: 23
+      }
     }
   },
   select: {
