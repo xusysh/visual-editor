@@ -52,6 +52,7 @@
       </el-tab-pane>
       <el-tab-pane label="控件属性">
         <el-form style="padding: 20px 20px 0 0; height: 100%">
+          <!-- 控件来源 -->
           <el-col :span="23" :offset="1">
             <el-form-item
               label-width="80px"
@@ -103,14 +104,14 @@
           <el-form-item label-width="80px" label="元素类型">
             <el-input
               :autosize="{ minRows: 16, maxRows: 200 }"
-              v-model="componentStyleDefinition.other.innerHtml.value"
+              v-model="componentStyleDefinition.other.class.value"
             ></el-input>
           </el-form-item>
           <el-form-item label-width="80px" label="内嵌文字">
             <el-input
               type="textarea"
               :autosize="{ minRows: 8, maxRows: 200 }"
-              v-model="componentStyleDefinition.other.innerHtml.value"
+              v-model="curComp.config.innerText"
             ></el-input>
           </el-form-item>
           <el-form-item label-width="80px" label="内嵌HTML">
@@ -151,6 +152,7 @@ export default {
     this.componentDefinition = JSON.parse(JSON.stringify(componentDefinition));
     this.$bus.on("selectedCompChange", (comp) => {
       this.curComp = JSON.parse(JSON.stringify(comp.$props));
+      console.log(this.curComp)
       this.parseComponentDef();
     });
   },

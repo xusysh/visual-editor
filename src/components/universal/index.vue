@@ -124,6 +124,7 @@ export default {
       this.$bus.on("setCompStyleAndProp", (comp) => {
         if (this.selected) {
           // console.log(style);
+          this.config.innerText = comp.config.innerText;
           this.config.style = comp.config.style;
           for (const propKey in comp.props) {
             this.props[propKey] = comp.props[propKey];

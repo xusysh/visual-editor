@@ -257,6 +257,7 @@ export default {
   },
   checkbox: {
     name: "多选框",
+    innerText: "同意条款",
     compSource: {
       name: "组件来源",
       value: "element-ui",
