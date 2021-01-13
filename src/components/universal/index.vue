@@ -130,15 +130,17 @@ export default {
       this.$bus.on("selectedCompChange", (comp) => {
         this.selected = this === comp;
       });
-      this.$bus.on("setCompStyle", (style) => {
+      this.$bus.on("setCompStyleAndProp", (comp) => {
         if (this.selected) {
           // console.log(style);
-          this.config.style = style;
+          this.config.style = comp.config.style;
+          for (const propKey in comp.props) {
+            this.props[propKey] = comp.props[propKey];
+          }
         }
       });
       this.$bus.on("addComponent", (newComp) => {
         if (this.selected) {
-          // console.log(newComp);
           this.initProp(newComp);
           this.children.push(newComp);
         }
@@ -200,7 +202,6 @@ export default {
       );
       const propsDef = this.componentDefinition[comp.targetType].props;
       for (const propDefKey in propsDef) {
-        console.log(propsDef[propDefKey].value)
         comp.props[propDefKey] = propsDef[propDefKey].value;
       }
       // console.log(comp.props)

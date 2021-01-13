@@ -19,7 +19,7 @@ export default {
         name: "列间隔",
         labelWidth: "60px",
         value: 0,
-        optionType: "el-input",
+        optionType: "el-input-number",
         optionSpan: 23
       }
     }
@@ -35,8 +35,11 @@ export default {
     targetComp: "el-col",
     props: {
       span: {
-        name: "占用栅格数",
-        value: 12
+        name: "栅格数",
+        labelWidth: "60px",
+        value: 12,
+        optionType: "el-input-number",
+        optionSpan: 23
       },
     }
   },

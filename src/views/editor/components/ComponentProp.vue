@@ -53,16 +53,16 @@
       <el-tab-pane label="控件属性">
         <el-form style="padding: 20px 20px 0 0; height: 100%">
           <el-col
-            v-for="(propOption, subKey, subIndex) in curCompDef.props"
-            :key="subIndex"
+            v-for="(propOption, key, index) in componentDefinition[
+              curComp.targetType
+            ].props"
+            :key="index"
             :span="propOption.optionSpan"
             :offset="1"
           >
             <el-form-item
               :label-width="
-                propOption.labelWidth
-                  ? propOption.labelWidth
-                  : '40px'
+                propOption.labelWidth ? propOption.labelWidth : '40px'
               "
               v-show="propOption.name"
               :label="propOption.name"
@@ -70,6 +70,7 @@
               <component
                 :is="propOption.optionType"
                 style="width: 100%"
+                v-model="curComp.props[key]"
               >
                 <div v-if="propOption.optionType === 'el-select'">
                   <el-option
@@ -85,12 +86,28 @@
         </el-form>
       </el-tab-pane>
       <el-tab-pane label="其他" style="padding: 6px 20px">
-        <el-input
-          style="margin-top: 16px"
-          type="textarea"
-          :autosize="{ minRows: 16, maxRows: 200 }"
-          v-model="componentStyleDefinition.other.innerHtml.value"
-        ></el-input>
+        <el-form style="padding: 20px 0 0 0; height: 100%">
+          <el-form-item label-width="80px" label="元素属性">
+            <el-input
+              :autosize="{ minRows: 16, maxRows: 200 }"
+              v-model="componentStyleDefinition.other.innerHtml.value"
+            ></el-input>
+          </el-form-item>
+          <el-form-item label-width="80px" label="内嵌文字">
+            <el-input
+              type="textarea"
+              :autosize="{ minRows: 8, maxRows: 200 }"
+              v-model="componentStyleDefinition.other.innerHtml.value"
+            ></el-input>
+          </el-form-item>
+          <el-form-item label-width="80px" label="内嵌HTML">
+            <el-input
+              type="textarea"
+              :autosize="{ minRows: 16, maxRows: 200 }"
+              v-model="componentStyleDefinition.other.innerHtml.value"
+            ></el-input>
+          </el-form-item>
+        </el-form>
       </el-tab-pane>
     </el-tabs>
   </div>
@@ -104,13 +121,13 @@ export default {
     return {
       activeCollapse: [],
       componentStyleDefinition: {},
-      curCompDef: {},
+      componentDefinition: {},
       curComp: {
-        targetType: 'responsiveRow',
+        targetType: "responsiveRow",
         config: {
           style: {},
         },
-        props: {}
+        props: {},
       },
     };
   },
@@ -118,9 +135,7 @@ export default {
     this.componentStyleDefinition = JSON.parse(
       JSON.stringify(componentStyleDefinition)
     );
-    this.curCompDef = JSON.parse(
-      JSON.stringify(componentDefinition[this.curComp.targetType])
-    );
+    this.componentDefinition = JSON.parse(JSON.stringify(componentDefinition));
     this.$bus.on("selectedCompChange", (comp) => {
       this.curComp = JSON.parse(JSON.stringify(comp.$props));
       this.parseComponentDef();
@@ -129,7 +144,7 @@ export default {
   watch: {
     curComp: {
       handler(curComp) {
-        this.$bus.emit("setCompStyle", curComp.config.style);
+        this.$bus.emit("setCompStyleAndProp", curComp);
       },
       deep: true,
     },
@@ -140,7 +155,6 @@ export default {
         this.componentStyleDefinition.style
       ).map((item) => item.name);
     },
-    setCurCompConf() {},
   },
   components: {},
 };
@@ -160,10 +174,12 @@ export default {
 }
 .el-tabs__content::-webkit-scrollbar-thumb {
   border-radius: 10px;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
   -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
   background: #535353;
 }
 .el-tabs__content::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
   -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
   border-radius: 10px;
   background: #ededed;
