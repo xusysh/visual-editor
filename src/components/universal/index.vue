@@ -233,6 +233,7 @@ export default {
 .uni-comp {
   position: relative;
   outline: 1px dashed #ddd !important;
+  transition: all .5s;
   // &:hover {
   //   outline: 1px dashed #ddd !important;
   // }
